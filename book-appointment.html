@@ -1,0 +1,691 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment â€” Forpets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fbf6ee;
+  --surface: #fffdf8;
+  --surface-warm: #f1e3cf;
+  --fg: #201914;
+  --fg-2: #4c4037;
+  --muted: #7a6d63;
+  --border: #ded2c3;
+  --border-soft: #eee4d7;
+  --accent: #9b5b32;
+  --accent-on: #ffffff;
+  --accent-hover: #8a4f29;
+  --success: #4f8a4f;
+  --warn: #c9822f;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Inter, system-ui, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 17px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --elev-raised: 0 20px 52px rgba(32,25,20,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--fg);
+  background: var(--bg);
+  min-height: 100vh;
+}
+/* APP NAV */
+.app-nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+.nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 36px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.nav-logo { font-family: var(--font-display); font-size: var(--text-xl); color: var(--fg); text-decoration: none; letter-spacing: -0.02em; }
+.nav-logo span { color: var(--accent); }
+.nav-back { font-size: var(--text-sm); color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 150ms; }
+.nav-back:hover { color: var(--accent); }
+
+/* PROGRESS */
+.progress-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0;
+}
+.progress-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 36px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+.progress-line {
+  position: absolute;
+  top: 50%;
+  left: 80px;
+  right: 80px;
+  height: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  transition: 240ms;
+}
+.step-item.active .step-circle { border-color: var(--accent); background: var(--accent); color: white; }
+.step-item.done .step-circle { border-color: var(--success); background: var(--success); color: white; }
+.step-label { font-size: var(--text-xs); color: var(--muted); font-weight: 500; text-align: center; }
+.step-item.active .step-label { color: var(--accent); font-weight: 600; }
+.step-item.done .step-label { color: var(--success); }
+
+/* MAIN */
+.booking-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 36px 80px;
+}
+.step-heading {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 40px);
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+.step-sub {
+  font-size: var(--text-base);
+  color: var(--fg-2);
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+/* STEP PANELS */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+/* RADIO CARDS */
+.radio-grid { display: grid; gap: var(--space-4); }
+.radio-grid-2 { grid-template-columns: 1fr 1fr; }
+.radio-grid-1 { grid-template-columns: 1fr; }
+.radio-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 200ms, box-shadow 200ms;
+  position: relative;
+}
+.radio-card:hover { border-color: var(--accent); }
+.radio-card.selected { border-color: var(--accent); background: rgba(155,91,50,0.04); }
+.radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.radio-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 200ms;
+}
+.radio-card.selected .radio-indicator { border-color: var(--accent); }
+.radio-inner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.radio-card.selected .radio-inner-dot { opacity: 1; }
+.radio-card-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--surface-warm);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.radio-card-content { flex: 1; }
+.radio-card-name { font-family: var(--font-display); font-size: var(--text-lg); color: var(--fg); letter-spacing: -0.01em; margin-bottom: 2px; }
+.radio-card-desc { font-size: var(--text-sm); color: var(--muted); }
+.radio-card-meta { font-size: var(--text-xs); color: var(--accent); font-weight: 500; margin-top: 4px; }
+
+/* DATE PICKER */
+.date-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.date-picker-section label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-2);
+  margin-bottom: var(--space-3);
+}
+.date-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--fg);
+  outline: none;
+  transition: border-color 150ms;
+}
+.date-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(155,91,50,0.12); }
+.time-slots-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-2);
+  margin-bottom: var(--space-4);
+}
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: 16px;
+}
+.time-slot {
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: border-color 200ms, background 200ms, color 200ms;
+}
+.time-slot:hover { border-color: var(--accent); color: var(--accent); }
+.time-slot.selected { border-color: var(--accent); background: var(--accent); color: white; }
+.time-slot.unavailable { opacity: 0.35; cursor: not-allowed; background: var(--bg); }
+.availability-note {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* CONFIRM */
+.confirm-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.confirm-header {
+  background: var(--surface-warm);
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.confirm-header-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--fg);
+  letter-spacing: -0.015em;
+}
+.confirm-rows { padding: 0; }
+.confirm-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.confirm-row:last-child { border-bottom: none; }
+.confirm-row-label { font-size: var(--text-sm); color: var(--muted); min-width: 120px; }
+.confirm-row-value { font-size: var(--text-sm); font-weight: 500; color: var(--fg); }
+.confirm-notice {
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  background: rgba(201,130,47,0.08);
+  border: 1px solid rgba(201,130,47,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.confirm-notice strong { color: var(--warn); }
+
+/* ACTIONS */
+.step-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
+  gap: var(--space-4);
+}
+.btn-back {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-2);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+}
+.btn-back:hover { border-color: var(--accent); color: var(--accent); }
+.btn-next {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--accent-on);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: background 150ms;
+}
+.btn-next:hover { background: var(--accent-hover); }
+.btn-next:disabled { opacity: 0.45; cursor: not-allowed; background: var(--accent); }
+
+/* SUCCESS */
+.success-state {
+  text-align: center;
+  padding: 60px 0;
+}
+.success-icon {
+  width: 72px;
+  height: 72px;
+  background: rgba(79,138,79,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: var(--success);
+}
+.success-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+.success-sub { font-size: var(--text-base); color: var(--fg-2); margin-bottom: 40px; max-width: 420px; margin-left: auto; margin-right: auto; }
+.success-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-secondary { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--accent-on); background: var(--accent); border: none; border-radius: var(--radius-md); padding: 12px 24px; cursor: pointer; text-decoration: none; }
+.btn-outline { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--fg); background: none; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 11px 24px; cursor: pointer; text-decoration: none; }
+
+@media (max-width: 639px) {
+  .booking-main { padding: 32px 16px 64px; }
+  .nav-inner { padding: 0 16px; }
+  .progress-inner { padding: 16px; }
+  .step-label { display: none; }
+  .radio-grid-2 { grid-template-columns: 1fr; }
+  .date-grid { grid-template-columns: 1fr; }
+  .time-slots { grid-template-columns: repeat(3, 1fr); }
+  .step-actions { flex-direction: column-reverse; }
+  .btn-next, .btn-back { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="app-nav">
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">For<span>pets</span></a>
+    <a href="dashboard-owner.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to dashboard
+    </a>
+  </div>
+</nav>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <div class="progress-line"></div>
+    <div class="step-item active" id="prog-1">
+      <div class="step-circle">1</div>
+      <span class="step-label">Select Pet</span>
+    </div>
+    <div class="step-item" id="prog-2">
+      <div class="step-circle">2</div>
+      <span class="step-label">Service</span>
+    </div>
+    <div class="step-item" id="prog-3">
+      <div class="step-circle">3</div>
+      <span class="step-label">Date & Time</span>
+    </div>
+    <div class="step-item" id="prog-4">
+      <div class="step-circle">4</div>
+      <span class="step-label">Confirm</span>
+    </div>
+  </div>
+</div>
+
+<div class="booking-main">
+
+  <!-- STEP 1: SELECT PET -->
+  <div class="step-panel active" id="step-1">
+    <h1 class="step-heading">Which pet is this for?</h1>
+    <p class="step-sub">Select a pet from your registered animals, or add a new one.</p>
+    <div class="radio-grid radio-grid-1">
+      <label class="radio-card" onclick="selectCard(this, 'pet')">
+        <input type="radio" name="pet" value="luna">
+        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
+        <div class="radio-card-icon">
+          <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="44" rx="16" ry="12" fill="#9b5b32"/>
+            <circle cx="32" cy="28" r="14" fill="#c4946a"/>
+          </svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name">Luna</div>
+          <div class="radio-card-desc">Golden Retriever Â· Female Â· 3 years</div>
+          <div class="radio-card-meta">Last visit: Sep 2023</div>
+        </div>
+      </label>
+      <label class="radio-card" onclick="selectCard(this, 'pet')">
+        <input type="radio" name="pet" value="zaza">
+        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
+        <div class="radio-card-icon" style="background:#e8f0ea;">
+          <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="44" rx="14" ry="10" fill="#4f8a4f"/>
+            <circle cx="32" cy="26" r="12" fill="#6aaa6a"/>
+          </svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name">Zaza</div>
+          <div class="radio-card-desc">Domestic Shorthair Â· Male Â· 5 years</div>
+          <div class="radio-card-meta">Last visit: Jul 2026</div>
+        </div>
+      </label>
+      <label class="radio-card" style="border-style:dashed;background:var(--bg);" onclick="selectCard(this, 'pet')">
+        <input type="radio" name="pet" value="new">
+        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
+        <div class="radio-card-icon" style="background:var(--surface-warm);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name" style="color:var(--muted);">Add a new pet</div>
+          <div class="radio-card-desc">Register a new animal to your account</div>
+        </div>
+      </label>
+    </div>
+    <div class="step-actions">
+      <span></span>
+      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: SERVICE -->
+  <div class="step-panel" id="step-2">
+    <h1 class="step-heading">What type of appointment?</h1>
+    <p class="step-sub">Choose a service. For emergencies, please call us directly â€” we do not take emergency bookings online.</p>
+    <div class="radio-grid radio-grid-1">
+      <label class="radio-card" onclick="selectCard(this, 'service')">
+        <input type="radio" name="service" value="vaccine">
+        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
+        <div class="radio-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/>
+          </svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name">Vaccine Appointment</div>
+          <div class="radio-card-desc">Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.</div>
+          <div class="radio-card-meta">Typically 20â€“30 min Â· Online booking available</div>
+        </div>
+      </label>
+      <label class="radio-card" onclick="selectCard(this, 'service')">
+        <input type="radio" name="service" value="surgery">
+        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
+        <div class="radio-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name">Surgery Consultation</div>
+          <div class="radio-card-desc">Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.</div>
+          <div class="radio-card-meta">Typically 45â€“60 min Â· Online booking available</div>
+        </div>
+      </label>
+      <div class="radio-card" style="opacity:0.5;cursor:default;background:var(--bg);border-style:dashed;">
+        <div class="radio-indicator" style="border-color:var(--border-soft)"></div>
+        <div class="radio-card-icon" style="background:var(--surface-warm);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+        </div>
+        <div class="radio-card-content">
+          <div class="radio-card-name" style="color:var(--muted)">Emergency â€” Phone Only</div>
+          <div class="radio-card-desc">Emergency cases cannot be booked online. Please call +972-XX-XXX-XXXX directly.</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-actions">
+      <button class="btn-back" onclick="prevStep(2)">â† Back</button>
+      <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: DATE & TIME -->
+  <div class="step-panel" id="step-3">
+    <h1 class="step-heading">Choose a date and time</h1>
+    <p class="step-sub">Available slots are shown in green. We're open Sundayâ€“Thursday and Saturday mornings.</p>
+    <div class="date-grid">
+      <div class="date-picker-section">
+        <label for="appt-date">Preferred date</label>
+        <input type="date" class="date-input" id="appt-date" min="2026-09-12" value="2026-09-15" onchange="updateSlots(this.value)">
+      </div>
+      <div class="date-picker-section">
+        <label>Veterinarian preference</label>
+        <select class="date-input" style="cursor:pointer;appearance:auto;">
+          <option>No preference</option>
+          <option>Dr. Hana Khalil</option>
+          <option>Dr. Omar Barakat</option>
+          <option>Dr. Laila Nassar</option>
+        </select>
+      </div>
+    </div>
+    <p class="time-slots-label">Available time slots â€” Monday, 15 Sep 2026</p>
+    <div class="time-slots" id="time-slots">
+      <div class="time-slot unavailable">08:00</div>
+      <div class="time-slot" onclick="selectTime(this)">08:30</div>
+      <div class="time-slot" onclick="selectTime(this)">09:00</div>
+      <div class="time-slot unavailable">09:30</div>
+      <div class="time-slot" onclick="selectTime(this)">10:00</div>
+      <div class="time-slot" onclick="selectTime(this)">10:30</div>
+      <div class="time-slot unavailable">11:00</div>
+      <div class="time-slot" onclick="selectTime(this)">11:30</div>
+      <div class="time-slot" onclick="selectTime(this)">12:00</div>
+      <div class="time-slot unavailable">12:30</div>
+      <div class="time-slot" onclick="selectTime(this)">14:00</div>
+      <div class="time-slot" onclick="selectTime(this)">14:30</div>
+      <div class="time-slot unavailable">15:00</div>
+      <div class="time-slot" onclick="selectTime(this)">15:30</div>
+      <div class="time-slot unavailable">16:00</div>
+      <div class="time-slot" onclick="selectTime(this)">16:30</div>
+    </div>
+    <p class="availability-note">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="var(--muted)" stroke-width="1.5"/><path d="M6 4v3M6 8.5v.5" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve.
+    </p>
+    <div class="step-actions">
+      <button class="btn-back" onclick="prevStep(3)">â† Back</button>
+      <button class="btn-next" onclick="nextStep(3)" id="btn-next-3" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: CONFIRM -->
+  <div class="step-panel" id="step-4">
+    <h1 class="step-heading">Confirm your booking</h1>
+    <p class="step-sub">Please review the details below. A confirmation will be sent to your email.</p>
+    <div class="confirm-card">
+      <div class="confirm-header">
+        <div class="confirm-header-title" id="confirm-service-title">Vaccine Appointment</div>
+      </div>
+      <div class="confirm-rows">
+        <div class="confirm-row"><span class="confirm-row-label">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna â€” Golden Retriever</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-value" id="confirm-time">â€”</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Veterinarian</span><span class="confirm-row-value">Dr. Hana Khalil</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Clinic</span><span class="confirm-row-value">Forpets Veterinary Clinic, Dabburiya</span></div>
+      </div>
+    </div>
+    <div class="confirm-notice">
+      <strong>Cancellation policy:</strong> Please cancel or reschedule at least 24 hours before your appointment. For same-day changes, call the clinic directly.
+    </div>
+    <div class="step-actions">
+      <button class="btn-back" onclick="prevStep(4)">â† Back</button>
+      <button class="btn-next" onclick="confirmBooking()">Confirm Appointment</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step-panel" id="step-success">
+    <div class="success-state">
+      <div class="success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      </div>
+      <h1 class="success-title">You're booked!</h1>
+      <p class="success-sub">Your appointment has been confirmed. A reminder will be sent to your email 24 hours before.</p>
+      <div class="success-actions">
+        <a href="dashboard-owner.html" class="btn-secondary">Back to Dashboard</a>
+        <a href="pet-profile.html" class="btn-outline">View Luna's Profile</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentStep = 1;
+const selections = { pet: null, service: null, time: null };
+
+function selectCard(el, type) {
+  el.closest('.radio-grid').querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const radio = el.querySelector('input[type="radio"]');
+  if (radio) radio.checked = true;
+  selections[type] = radio ? radio.value : type;
+  const btnId = type === 'pet' ? 'btn-next-1' : 'btn-next-2';
+  const btn = document.getElementById(btnId);
+  if (btn) btn.disabled = false;
+  updateConfirm();
+}
+
+function selectTime(el) {
+  document.querySelectorAll('.time-slot.selected').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+  selections.time = el.textContent.trim();
+  document.getElementById('btn-next-3').disabled = false;
+  updateConfirm();
+}
+
+function updateConfirm() {
+  const petNames = { luna: 'Luna â€” Golden Retriever', zaza: 'Zaza â€” Domestic Shorthair', new: 'New pet' };
+  const serviceNames = { vaccine: 'Vaccine Appointment', surgery: 'Surgery Consultation' };
+  if (selections.pet && document.getElementById('confirm-pet')) {
+    document.getElementById('confirm-pet').textContent = petNames[selections.pet] || selections.pet;
+  }
+  if (selections.service) {
+    const sn = serviceNames[selections.service] || selections.service;
+    document.getElementById('confirm-service').textContent = sn;
+    document.getElementById('confirm-service-title').textContent = sn;
+  }
+  if (selections.time) {
+    document.getElementById('confirm-time').textContent = selections.time;
+  }
+}
+
+function nextStep(from) {
+  document.getElementById('step-' + from).classList.remove('active');
+  document.getElementById('prog-' + from).classList.remove('active');
+  document.getElementById('prog-' + from).classList.add('done');
+  const to = from + 1;
+  document.getElementById('step-' + to).classList.add('active');
+  document.getElementById('prog-' + to).classList.add('active');
+  currentStep = to;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(from) {
+  document.getElementById('step-' + from).classList.remove('active');
+  document.getElementById('prog-' + from).classList.remove('active');
+  const to = from - 1;
+  document.getElementById('step-' + to).classList.add('active');
+  document.getElementById('prog-' + to).classList.remove('done');
+  document.getElementById('prog-' + to).classList.add('active');
+  currentStep = to;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function confirmBooking() {
+  document.getElementById('step-4').classList.remove('active');
+  document.getElementById('step-success').classList.add('active');
+  document.querySelectorAll('.step-item').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateSlots(val) {
+  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const d = new Date(val + 'T12:00:00');
+  const label = dayNames[d.getDay()] + ', ' + val.replace(/-/g, ' ').replace(/^(\d{4}) (\d{2}) (\d{2})$/, (_, y, m, d2) => {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return d2 + ' ' + months[parseInt(m)-1] + ' ' + y;
+  });
+  document.querySelector('.time-slots-label').textContent = 'Available time slots â€” ' + label;
+  document.querySelectorAll('.time-slot.selected').forEach(t => t.classList.remove('selected'));
+  selections.time = null;
+  document.getElementById('btn-next-3').disabled = true;
+}
+</script>
+</body>
+</html>
