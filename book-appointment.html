@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Appointment â€” Forpets</title>
+<title>Book Appointment — Forpets</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
@@ -381,7 +381,7 @@
         </div>
         <div class="radio-card-content">
           <div class="radio-card-name">Luna</div>
-          <div class="radio-card-desc">Golden Retriever Â· Female Â· 3 years</div>
+          <div class="radio-card-desc">Golden Retriever · Female · 3 years</div>
           <div class="radio-card-meta">Last visit: Sep 2023</div>
         </div>
       </label>
@@ -396,7 +396,7 @@
         </div>
         <div class="radio-card-content">
           <div class="radio-card-name">Zaza</div>
-          <div class="radio-card-desc">Domestic Shorthair Â· Male Â· 5 years</div>
+          <div class="radio-card-desc">Domestic Shorthair · Male · 5 years</div>
           <div class="radio-card-meta">Last visit: Jul 2026</div>
         </div>
       </label>
@@ -421,7 +421,7 @@
   <!-- STEP 2: SERVICE -->
   <div class="step-panel" id="step-2">
     <h1 class="step-heading">What type of appointment?</h1>
-    <p class="step-sub">Choose a service. For emergencies, please call us directly â€” we do not take emergency bookings online.</p>
+    <p class="step-sub">Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.</p>
     <div class="radio-grid radio-grid-1">
       <label class="radio-card" onclick="selectCard(this, 'service')">
         <input type="radio" name="service" value="vaccine">
@@ -434,7 +434,7 @@
         <div class="radio-card-content">
           <div class="radio-card-name">Vaccine Appointment</div>
           <div class="radio-card-desc">Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.</div>
-          <div class="radio-card-meta">Typically 20â€“30 min Â· Online booking available</div>
+          <div class="radio-card-meta">Typically 20–30 min · Online booking available</div>
         </div>
       </label>
       <label class="radio-card" onclick="selectCard(this, 'service')">
@@ -448,7 +448,7 @@
         <div class="radio-card-content">
           <div class="radio-card-name">Surgery Consultation</div>
           <div class="radio-card-desc">Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.</div>
-          <div class="radio-card-meta">Typically 45â€“60 min Â· Online booking available</div>
+          <div class="radio-card-meta">Typically 45–60 min · Online booking available</div>
         </div>
       </label>
       <div class="radio-card" style="opacity:0.5;cursor:default;background:var(--bg);border-style:dashed;">
@@ -457,13 +457,13 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
         </div>
         <div class="radio-card-content">
-          <div class="radio-card-name" style="color:var(--muted)">Emergency â€” Phone Only</div>
+          <div class="radio-card-name" style="color:var(--muted)">Emergency — Phone Only</div>
           <div class="radio-card-desc">Emergency cases cannot be booked online. Please call +972-XX-XXX-XXXX directly.</div>
         </div>
       </div>
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(2)">â† Back</button>
+      <button class="btn-back" onclick="prevStep(2)">← Back</button>
       <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled>Continue</button>
     </div>
   </div>
@@ -471,7 +471,7 @@
   <!-- STEP 3: DATE & TIME -->
   <div class="step-panel" id="step-3">
     <h1 class="step-heading">Choose a date and time</h1>
-    <p class="step-sub">Available slots are shown in green. We're open Sundayâ€“Thursday and Saturday mornings.</p>
+    <p class="step-sub">Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.</p>
     <div class="date-grid">
       <div class="date-picker-section">
         <label for="appt-date">Preferred date</label>
@@ -487,7 +487,7 @@
         </select>
       </div>
     </div>
-    <p class="time-slots-label">Available time slots â€” Monday, 15 Sep 2026</p>
+    <p class="time-slots-label">Available time slots — Monday, 15 Sep 2026</p>
     <div class="time-slots" id="time-slots">
       <div class="time-slot unavailable">08:00</div>
       <div class="time-slot" onclick="selectTime(this)">08:30</div>
@@ -511,7 +511,7 @@
       Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve.
     </p>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(3)">â† Back</button>
+      <button class="btn-back" onclick="prevStep(3)">← Back</button>
       <button class="btn-next" onclick="nextStep(3)" id="btn-next-3" disabled>Continue</button>
     </div>
   </div>
@@ -525,10 +525,10 @@
         <div class="confirm-header-title" id="confirm-service-title">Vaccine Appointment</div>
       </div>
       <div class="confirm-rows">
-        <div class="confirm-row"><span class="confirm-row-label">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna â€” Golden Retriever</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna — Golden Retriever</span></div>
         <div class="confirm-row"><span class="confirm-row-label">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
         <div class="confirm-row"><span class="confirm-row-label">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-value" id="confirm-time">â€”</span></div>
+        <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-value" id="confirm-time">—</span></div>
         <div class="confirm-row"><span class="confirm-row-label">Veterinarian</span><span class="confirm-row-value">Dr. Hana Khalil</span></div>
         <div class="confirm-row"><span class="confirm-row-label">Clinic</span><span class="confirm-row-value">Forpets Veterinary Clinic, Dabburiya</span></div>
       </div>
@@ -537,7 +537,7 @@
       <strong>Cancellation policy:</strong> Please cancel or reschedule at least 24 hours before your appointment. For same-day changes, call the clinic directly.
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(4)">â† Back</button>
+      <button class="btn-back" onclick="prevStep(4)">← Back</button>
       <button class="btn-next" onclick="confirmBooking()">Confirm Appointment</button>
     </div>
   </div>
@@ -584,7 +584,7 @@ function selectTime(el) {
 }
 
 function updateConfirm() {
-  const petNames = { luna: 'Luna â€” Golden Retriever', zaza: 'Zaza â€” Domestic Shorthair', new: 'New pet' };
+  const petNames = { luna: 'Luna — Golden Retriever', zaza: 'Zaza — Domestic Shorthair', new: 'New pet' };
   const serviceNames = { vaccine: 'Vaccine Appointment', surgery: 'Surgery Consultation' };
   if (selections.pet && document.getElementById('confirm-pet')) {
     document.getElementById('confirm-pet').textContent = petNames[selections.pet] || selections.pet;
@@ -635,7 +635,7 @@ function updateSlots(val) {
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return d2 + ' ' + months[parseInt(m)-1] + ' ' + y;
   });
-  document.querySelector('.time-slots-label').textContent = 'Available time slots â€” ' + label;
+  document.querySelector('.time-slots-label').textContent = 'Available time slots — ' + label;
   document.querySelectorAll('.time-slot.selected').forEach(t => t.classList.remove('selected'));
   selections.time = null;
   document.getElementById('btn-next-3').disabled = true;
