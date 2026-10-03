@@ -1,12 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forpets Veterinary Clinic — Dabburiya</title>
+<!-- Anti-FOUC: set direction from localStorage before first paint -->
+<script>
+(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 html { scroll-behavior: smooth; }
@@ -392,7 +396,7 @@ footer {
   gap: var(--space-5);
 }
 .nav-drawer.open { display: flex; }
-.nav-drawer a {
+.nav-drawer > a {
   font-size: var(--text-base);
   font-weight: 500;
   color: var(--fg);
@@ -400,6 +404,17 @@ footer {
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--border-soft);
 }
+.nav-drawer .lang-toggle { margin-top: var(--space-2); }
+
+/* RTL — home-specific layout notes:
+   Grid columns and flex order reverse automatically with dir="rtl".
+   No extra rules needed for the two-column grids. */
+
+/* Arabic — zero out positive letter-spacing on eyebrow labels.
+   Positive tracking breaks Arabic cursive ligatures. */
+[lang="ar"] .hero-eyebrow,
+[lang="ar"] .section-eyebrow,
+[lang="ar"] .service-tag { letter-spacing: 0; text-transform: none; }
 
 /* RESPONSIVE */
 @media (max-width: 1023px) {
@@ -413,7 +428,10 @@ footer {
 }
 @media (max-width: 639px) {
   :root { --container-gutter: 16px; }
-  .nav-links, .nav-actions { display: none; }
+  .nav-links { display: none; }
+  /* hide nav buttons but keep lang-toggle visible */
+  .nav-actions .btn-ghost,
+  .nav-actions .btn-primary { display: none; }
   .nav-mobile-toggle { display: block; }
   .services-grid { grid-template-columns: 1fr; }
   .trust-bar { flex-wrap: wrap; gap: 24px; }
@@ -434,25 +452,35 @@ footer {
     <div class="nav-inner">
       <a href="home.html" class="nav-logo">For<span>pets</span></a>
       <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#hours">Hours</a></li>
-        <li><a href="#location">Location</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#hours" data-i18n="nav.hours">Hours</a></li>
+        <li><a href="#location" data-i18n="nav.location">Location</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="login.html" class="btn-ghost">Owner Login</a>
-        <a href="book-appointment.html" class="btn-primary">Book Appointment</a>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn active" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="he">עברית</button>
+          <button class="lang-btn" data-lang="ar">العربية</button>
+        </div>
+        <a href="login.html" class="btn-ghost" data-i18n="nav.ownerLogin">Owner Login</a>
+        <a href="book-appointment.html" class="btn-primary" data-i18n="nav.bookAppointment">Book Appointment</a>
       </div>
-      <button class="nav-mobile-toggle" onclick="document.getElementById('mobileDrawer').classList.toggle('open')" aria-label="Menu">
+      <button class="nav-mobile-toggle" onclick="document.getElementById('mobileDrawer').classList.toggle('open')" data-i18n-aria="nav.menuAriaLabel" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <div class="nav-drawer" id="mobileDrawer">
-    <a href="#services">Services</a>
-    <a href="#hours">Hours</a>
-    <a href="#location">Location</a>
-    <a href="login.html">Owner Login</a>
-    <a href="book-appointment.html" style="color:var(--accent)">Book Appointment</a>
+    <a href="#services" data-i18n="nav.services">Services</a>
+    <a href="#hours" data-i18n="nav.hours">Hours</a>
+    <a href="#location" data-i18n="nav.location">Location</a>
+    <a href="login.html" data-i18n="nav.ownerLogin">Owner Login</a>
+    <a href="book-appointment.html" style="color:var(--accent)" data-i18n="nav.bookAppointment">Book Appointment</a>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="he">עברית</button>
+      <button class="lang-btn" data-lang="ar">العربية</button>
+    </div>
   </div>
 </nav>
 
@@ -461,25 +489,25 @@ footer {
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
-        <p class="hero-eyebrow">Dabburiya · Established 2009</p>
-        <h1 class="hero-headline">Caring for the animals you love</h1>
-        <p class="hero-sub">Forpets Veterinary Clinic provides compassionate, expert care for your pets. From routine checkups to specialist consultations — we're here for every chapter of their life.</p>
+        <p class="hero-eyebrow" data-i18n="hero.eyebrow">Dabburiya · Established 2009</p>
+        <h1 class="hero-headline" data-i18n="hero.headline">Caring for the animals you love</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Forpets Veterinary Clinic provides compassionate, expert care for your pets. From routine checkups to specialist consultations — we're here for every chapter of their life.</p>
         <div class="hero-ctas">
-          <a href="book-appointment.html" class="btn-primary">Book an Appointment</a>
-          <a href="login.html" class="btn-ghost">My Pet Portal</a>
+          <a href="book-appointment.html" class="btn-primary" data-i18n="hero.ctaBook">Book an Appointment</a>
+          <a href="login.html" class="btn-ghost" data-i18n="hero.ctaPortal">My Pet Portal</a>
         </div>
         <div class="trust-bar">
           <div class="trust-item">
             <span class="trust-num">1,200+</span>
-            <span class="trust-label">Pets treated</span>
+            <span class="trust-label" data-i18n="hero.trustPetsTreated">Pets treated</span>
           </div>
           <div class="trust-item">
             <span class="trust-num">15+</span>
-            <span class="trust-label">Years of care</span>
+            <span class="trust-label" data-i18n="hero.trustYearsOfCare">Years of care</span>
           </div>
           <div class="trust-item">
             <span class="trust-num">3</span>
-            <span class="trust-label">Veterinarians</span>
+            <span class="trust-label" data-i18n="hero.trustVeterinarians">Veterinarians</span>
           </div>
         </div>
       </div>
@@ -492,7 +520,7 @@ footer {
             <circle cx="14" cy="32" r="4" fill="#9b5b32" opacity="0.3"/>
             <circle cx="50" cy="32" r="4" fill="#9b5b32" opacity="0.3"/>
           </svg>
-          <p>Clinic photo</p>
+          <p data-i18n="hero.imagePlaceholder">Clinic photo</p>
         </div>
       </div>
     </div>
@@ -503,9 +531,9 @@ footer {
 <section class="section" id="services" data-od-id="services">
   <div class="container">
     <div class="section-header">
-      <p class="section-eyebrow">Our Services</p>
-      <h2 class="section-title">Comprehensive care<br>under one roof</h2>
-      <p class="section-desc">Every service at Forpets is designed around your pet's comfort and your peace of mind.</p>
+      <p class="section-eyebrow" data-i18n="services.eyebrow">Our Services</p>
+      <h2 class="section-title" data-i18n="services.title">Comprehensive care<br>under one roof</h2>
+      <p class="section-desc" data-i18n="services.desc">Every service at Forpets is designed around your pet's comfort and your peace of mind.</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
@@ -514,9 +542,9 @@ footer {
             <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/>
           </svg>
         </div>
-        <h3 class="service-name">General Checkup</h3>
-        <p class="service-desc">Routine wellness exams, health screenings, dental checks, and preventative care plans tailored to your pet's age and breed.</p>
-        <span class="service-tag">Walk-in welcome</span>
+        <h3 class="service-name" data-i18n="services.general.name">General Checkup</h3>
+        <p class="service-desc" data-i18n="services.general.desc">Routine wellness exams, health screenings, dental checks, and preventative care plans tailored to your pet's age and breed.</p>
+        <span class="service-tag" data-i18n="services.general.tag">Walk-in welcome</span>
       </div>
       <div class="service-card">
         <div class="service-icon">
@@ -524,9 +552,9 @@ footer {
             <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/>
           </svg>
         </div>
-        <h3 class="service-name">Vaccine Appointments</h3>
-        <p class="service-desc">Core and lifestyle vaccinations for dogs and cats, including rabies, distemper, bordetella, and feline leukemia. Records kept in your pet portal.</p>
-        <span class="service-tag">Bookable online</span>
+        <h3 class="service-name" data-i18n="services.vaccine.name">Vaccine Appointments</h3>
+        <p class="service-desc" data-i18n="services.vaccine.desc">Core and lifestyle vaccinations for dogs and cats, including rabies, distemper, bordetella, and feline leukemia. Records kept in your pet portal.</p>
+        <span class="service-tag" data-i18n="services.vaccine.tag">Bookable online</span>
       </div>
       <div class="service-card">
         <div class="service-icon">
@@ -534,9 +562,9 @@ footer {
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
           </svg>
         </div>
-        <h3 class="service-name">Surgery Consultation</h3>
-        <p class="service-desc">Pre-surgical assessments, second opinions, and elective procedure planning. Our senior veterinarians walk you through every step of the process.</p>
-        <span class="service-tag">Bookable online</span>
+        <h3 class="service-name" data-i18n="services.surgery.name">Surgery Consultation</h3>
+        <p class="service-desc" data-i18n="services.surgery.desc">Pre-surgical assessments, second opinions, and elective procedure planning. Our senior veterinarians walk you through every step of the process.</p>
+        <span class="service-tag" data-i18n="services.surgery.tag">Bookable online</span>
       </div>
       <div class="service-card">
         <div class="service-icon">
@@ -544,9 +572,9 @@ footer {
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
         </div>
-        <h3 class="service-name">Diagnostics & Lab</h3>
-        <p class="service-desc">On-site blood panels, urinalysis, X-ray imaging, and ultrasound. Most results returned same-day for your peace of mind.</p>
-        <span class="service-tag service-tag-warn">Appointment required</span>
+        <h3 class="service-name" data-i18n="services.diagnostics.name">Diagnostics &amp; Lab</h3>
+        <p class="service-desc" data-i18n="services.diagnostics.desc">On-site blood panels, urinalysis, X-ray imaging, and ultrasound. Most results returned same-day for your peace of mind.</p>
+        <span class="service-tag service-tag-warn" data-i18n="services.diagnostics.tag">Appointment required</span>
       </div>
       <div class="service-card">
         <div class="service-icon">
@@ -554,9 +582,9 @@ footer {
             <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
           </svg>
         </div>
-        <h3 class="service-name">Dental Care</h3>
-        <p class="service-desc">Professional teeth cleaning, extractions, and oral health assessments. Poor dental health affects your pet's overall wellbeing — we take it seriously.</p>
-        <span class="service-tag service-tag-warn">Appointment required</span>
+        <h3 class="service-name" data-i18n="services.dental.name">Dental Care</h3>
+        <p class="service-desc" data-i18n="services.dental.desc">Professional teeth cleaning, extractions, and oral health assessments. Poor dental health affects your pet's overall wellbeing — we take it seriously.</p>
+        <span class="service-tag service-tag-warn" data-i18n="services.dental.tag">Appointment required</span>
       </div>
       <div class="service-card">
         <div class="service-icon">
@@ -564,9 +592,9 @@ footer {
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
           </svg>
         </div>
-        <h3 class="service-name">Emergency — Phone Only</h3>
-        <p class="service-desc">For urgent after-hours emergencies, call us directly. We maintain an on-call line for registered patients of the clinic.</p>
-        <span class="service-tag service-tag-warn">Phone: +972-XX-XXX-XXXX</span>
+        <h3 class="service-name" data-i18n="services.emergency.name">Emergency — Phone Only</h3>
+        <p class="service-desc" data-i18n="services.emergency.desc">For urgent after-hours emergencies, call us directly. We maintain an on-call line for registered patients of the clinic.</p>
+        <span class="service-tag service-tag-warn" data-i18n="services.emergency.tag">Phone: +972-XX-XXX-XXXX</span>
       </div>
     </div>
   </div>
@@ -577,36 +605,35 @@ footer {
   <div class="container">
     <div class="info-grid">
       <div>
-        <h2 class="info-block-title">Clinic Hours</h2>
+        <h2 class="info-block-title" data-i18n="hours.title">Clinic Hours</h2>
         <ul class="hours-list">
-          <li class="hours-row"><span class="day">Sunday</span><span class="time">08:00 – 18:00</span></li>
-          <li class="hours-row"><span class="day">Monday</span><span class="time">08:00 – 18:00</span></li>
-          <li class="hours-row"><span class="day">Tuesday</span><span class="time">08:00 – 18:00</span></li>
-          <li class="hours-row"><span class="day">Wednesday</span><span class="time">08:00 – 18:00</span></li>
-          <li class="hours-row"><span class="day">Thursday</span><span class="time">08:00 – 14:00</span></li>
-          <li class="hours-row"><span class="day">Friday</span><span class="time">Closed</span></li>
-          <li class="hours-row today"><span class="day">Saturday</span><span class="time">09:00 – 13:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.sunday">Sunday</span><span class="time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.monday">Monday</span><span class="time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.tuesday">Tuesday</span><span class="time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.wednesday">Wednesday</span><span class="time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.thursday">Thursday</span><span class="time">08:00 – 14:00</span></li>
+          <li class="hours-row"><span class="day" data-i18n="hours.days.friday">Friday</span><span class="time" data-i18n="hours.closed">Closed</span></li>
+          <li class="hours-row today"><span class="day" data-i18n="hours.days.saturday">Saturday</span><span class="time">09:00 – 13:00</span></li>
         </ul>
         <div class="emergency-note">
-          <p><strong>Emergencies after hours?</strong> Call our on-call line. Walk-in emergencies cannot be accommodated — please phone ahead so we can prepare.</p>
+          <p data-i18n="hours.emergency"><strong>Emergencies after hours?</strong> Call our on-call line. Walk-in emergencies cannot be accommodated — please phone ahead so we can prepare.</p>
         </div>
       </div>
       <div id="location">
-        <h2 class="info-block-title">Find Us in Dabburiya</h2>
+        <h2 class="info-block-title" data-i18n="location.title">Find Us in Dabburiya</h2>
         <div class="location-line">
           <strong>Forpets Veterinary Clinic</strong>
-          Dabburiya, Lower Galilee, Israel<br>
-          Near the village center — look for the green cross sign.
+          <span data-i18n="location.addressDesc">Dabburiya, Lower Galilee, Israel<br>Near the village center — look for the green cross sign.</span>
         </div>
         <div class="location-line">
-          <strong>Phone</strong>
+          <strong data-i18n="location.phoneLabel">Phone</strong>
           +972-XX-XXX-XXXX
         </div>
         <div class="location-line">
-          <strong>Email</strong>
+          <strong data-i18n="location.emailLabel">Email</strong>
           info@forpets-vet.com
         </div>
-        <div class="map-placeholder">Map placeholder — embed Google Maps here</div>
+        <div class="map-placeholder" data-i18n="location.mapPlaceholder">Map placeholder — embed Google Maps here</div>
       </div>
     </div>
   </div>
@@ -615,11 +642,11 @@ footer {
 <!-- CTA SECTION -->
 <section class="cta-section" data-od-id="cta">
   <div class="container">
-    <h2 class="cta-title">Ready to book?</h2>
-    <p class="cta-sub">Create your pet's profile and book your next visit in minutes.</p>
+    <h2 class="cta-title" data-i18n="cta.title">Ready to book?</h2>
+    <p class="cta-sub" data-i18n="cta.sub">Create your pet's profile and book your next visit in minutes.</p>
     <div class="cta-btns">
-      <a href="book-appointment.html" class="btn-primary">Book an Appointment</a>
-      <a href="login.html" class="btn-ghost">Owner Login</a>
+      <a href="book-appointment.html" class="btn-primary" data-i18n="cta.book">Book an Appointment</a>
+      <a href="login.html" class="btn-ghost" data-i18n="cta.login">Owner Login</a>
     </div>
   </div>
 </section>
@@ -630,14 +657,15 @@ footer {
     <div class="footer-inner">
       <div class="footer-brand">For<span>pets</span> Veterinary Clinic</div>
       <ul class="footer-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="login.html">Owner Portal</a></li>
-        <li><a href="#location">Contact</a></li>
+        <li><a href="#services" data-i18n="footer.links.services">Services</a></li>
+        <li><a href="login.html" data-i18n="footer.links.portal">Owner Portal</a></li>
+        <li><a href="#location" data-i18n="footer.links.contact">Contact</a></li>
       </ul>
-      <p class="footer-copy">&copy; 2026 Forpets Veterinary Clinic, Dabburiya</p>
+      <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Forpets Veterinary Clinic, Dabburiya</p>
     </div>
   </div>
 </footer>
 
+<script src="i18n/i18n.js"></script>
 </body>
 </html>
