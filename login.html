@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
+<script>(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login — Forpets Veterinary Clinic</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title data-i18n="login.page.title">Login — Forpets Veterinary Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 body {
@@ -180,21 +181,6 @@ input::placeholder { color: var(--muted); }
 }
 .btn-submit:hover { background: var(--accent-hover); }
 
-.form-divider {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin: var(--space-6) 0;
-  color: var(--muted);
-  font-size: var(--text-xs);
-}
-.form-divider::before, .form-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
 .register-prompt {
   text-align: center;
   font-size: var(--text-sm);
@@ -250,6 +236,9 @@ input::placeholder { color: var(--muted); }
 }
 .demo-chip:hover { border-color: var(--accent); color: var(--accent); }
 
+/* Arabic resets */
+[lang="ar"] .demo-links p { letter-spacing: 0; text-transform: none; }
+
 @media (max-width: 480px) {
   main { padding: 32px 16px; }
   .login-card { padding: var(--space-6); }
@@ -261,20 +250,27 @@ input::placeholder { color: var(--muted); }
 
 <div class="topbar">
   <a href="home.html" class="topbar-logo">For<span>pets</span></a>
-  <a href="home.html" class="topbar-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to clinic
-  </a>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="he">עברית</button>
+      <button class="lang-btn" data-lang="ar">العربية</button>
+    </div>
+    <a href="home.html" class="topbar-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span data-i18n="login.topbar.back">Back to clinic</span>
+    </a>
+  </div>
 </div>
 
 <main>
   <div class="login-wrap">
-    <h1 class="login-heading">Welcome back</h1>
-    <p class="login-sub">Forpets Veterinary Clinic — Dabburiya</p>
+    <h1 class="login-heading" data-i18n="login.heading">Welcome back</h1>
+    <p class="login-sub" data-i18n="login.sub">Forpets Veterinary Clinic — Dabburiya</p>
 
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('owner', this)">Pet Owner</button>
-      <button class="tab-btn" onclick="switchTab('staff', this)">Clinic Staff</button>
+      <button class="tab-btn active" onclick="switchTab('owner', this)" data-i18n="login.tabOwner">Pet Owner</button>
+      <button class="tab-btn" onclick="switchTab('staff', this)" data-i18n="login.tabStaff">Clinic Staff</button>
     </div>
 
     <div class="login-card">
@@ -283,47 +279,48 @@ input::placeholder { color: var(--muted); }
       <div class="form-panel active" id="panel-owner">
         <form onsubmit="handleLogin(event, 'owner')">
           <div class="form-group">
-            <label for="owner-email">Email address</label>
-            <input type="email" id="owner-email" placeholder="you@example.com" autocomplete="email" required>
+            <label for="owner-email" data-i18n="login.owner.emailLabel">Email address</label>
+            <input type="email" id="owner-email" data-i18n-placeholder="login.owner.emailPlaceholder" placeholder="you@example.com" autocomplete="email" required>
           </div>
           <div class="form-group">
-            <label for="owner-password">Password</label>
+            <label for="owner-password" data-i18n="login.owner.passwordLabel">Password</label>
             <input type="password" id="owner-password" placeholder="••••••••" autocomplete="current-password" required>
           </div>
           <div class="form-row">
             <label class="remember-check">
-              <input type="checkbox" name="remember"> Remember me
+              <input type="checkbox" name="remember"> <span data-i18n="login.owner.rememberMe">Remember me</span>
             </label>
-            <a href="#" class="forgot-link">Forgot password?</a>
+            <a href="#" class="forgot-link" data-i18n="login.owner.forgotPassword">Forgot password?</a>
           </div>
-          <button type="submit" class="btn-submit">Sign in to my portal</button>
+          <button type="submit" class="btn-submit" data-i18n="login.owner.submit">Sign in to my portal</button>
         </form>
         <div class="register-prompt">
-          New to Forpets? <a href="#">Register your account</a>
+          <span data-i18n="login.owner.registerPrompt">New to Forpets?</span>
+          <a href="#" data-i18n="login.owner.registerLink">Register your account</a>
         </div>
       </div>
 
       <!-- STAFF PANEL -->
       <div class="form-panel" id="panel-staff">
-        <div class="staff-note">
+        <div class="staff-note" data-i18n="login.staff.note">
           <strong>Staff access only.</strong> Use your clinic-issued credentials. If you need access, contact the clinic administrator.
         </div>
         <form onsubmit="handleLogin(event, 'staff')">
           <div class="form-group">
-            <label for="staff-id">Staff ID or email</label>
-            <input type="text" id="staff-id" placeholder="staff.name@forpets-vet.com" autocomplete="username" required>
+            <label for="staff-id" data-i18n="login.staff.idLabel">Staff ID or email</label>
+            <input type="text" id="staff-id" data-i18n-placeholder="login.staff.idPlaceholder" placeholder="staff.name@forpets-vet.com" autocomplete="username" required>
           </div>
           <div class="form-group">
-            <label for="staff-password">Password</label>
+            <label for="staff-password" data-i18n="login.staff.passwordLabel">Password</label>
             <input type="password" id="staff-password" placeholder="••••••••" autocomplete="current-password" required>
           </div>
           <div class="form-row">
             <label class="remember-check">
-              <input type="checkbox"> Stay signed in
+              <input type="checkbox"> <span data-i18n="login.staff.staySignedIn">Stay signed in</span>
             </label>
-            <a href="#" class="forgot-link">Forgot password?</a>
+            <a href="#" class="forgot-link" data-i18n="login.staff.forgotPassword">Forgot password?</a>
           </div>
-          <button type="submit" class="btn-submit">Sign in as staff</button>
+          <button type="submit" class="btn-submit" data-i18n="login.staff.submit">Sign in as staff</button>
         </form>
       </div>
 
@@ -331,10 +328,10 @@ input::placeholder { color: var(--muted); }
 
     <!-- PROTOTYPE NAVIGATION -->
     <div class="demo-links">
-      <p>Prototype — go to screen</p>
+      <p data-i18n="login.proto.label">Prototype — go to screen</p>
       <div class="demo-links-row">
-        <a href="dashboard-owner.html" class="demo-chip">Owner Dashboard</a>
-        <a href="dashboard-staff.html" class="demo-chip">Staff Dashboard</a>
+        <a href="dashboard-owner.html" class="demo-chip" data-i18n="login.proto.ownerDashboard">Owner Dashboard</a>
+        <a href="dashboard-staff.html" class="demo-chip" data-i18n="login.proto.staffDashboard">Staff Dashboard</a>
       </div>
     </div>
   </div>
@@ -357,5 +354,6 @@ function handleLogin(e, role) {
   }
 }
 </script>
+<script src="i18n/i18n.js"></script>
 </body>
 </html>

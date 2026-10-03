@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
+<script>(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luna — Pet Profile · Forpets</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title data-i18n="petProfile.page.title">Luna — Pet Profile · Forpets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* APP NAV */
@@ -170,6 +171,8 @@
 .weight-bar { height: 100%; background: var(--accent); border-radius: 4px; transition: width 600ms; }
 .weight-label { font-size: var(--text-xs); color: var(--muted); white-space: nowrap; min-width: 60px; text-align: right; }
 .weight-date { font-size: var(--text-xs); color: var(--muted); min-width: 80px; }
+/* Arabic resets */
+[lang="ar"] .pet-attr span { letter-spacing: 0; text-transform: none; }
 /* RESPONSIVE */
 @media (max-width: 767px) {
   .pet-header { flex-direction: column; gap: 24px; padding: 24px; }
@@ -189,13 +192,18 @@
   <div class="nav-inner">
     <a href="home.html" class="nav-logo">For<span>pets</span></a>
     <ul class="nav-menu">
-      <li><a href="dashboard-owner.html">Dashboard</a></li>
-      <li><a href="pet-profile.html" class="active">My Pets</a></li>
-      <li><a href="book-appointment.html">Book Appointment</a></li>
+      <li><a href="dashboard-owner.html" data-i18n="petProfile.nav.dashboard">Dashboard</a></li>
+      <li><a href="pet-profile.html" class="active" data-i18n="petProfile.nav.myPets">My Pets</a></li>
+      <li><a href="book-appointment.html" data-i18n="petProfile.nav.bookAppointment">Book Appointment</a></li>
     </ul>
     <div class="nav-user">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="he">עברית</button>
+        <button class="lang-btn" data-lang="ar">العربية</button>
+      </div>
       <div class="avatar">SA</div>
-      <a href="login.html" class="btn-logout">Log out</a>
+      <a href="login.html" class="btn-logout" data-i18n="petProfile.nav.logOut">Log out</a>
     </div>
   </div>
 </nav>
@@ -203,9 +211,9 @@
 <div class="page">
 
   <div class="breadcrumb">
-    <a href="dashboard-owner.html">Dashboard</a>
+    <a href="dashboard-owner.html" data-i18n="petProfile.breadcrumb.dashboard">Dashboard</a>
     <span class="breadcrumb-sep">/</span>
-    My Pets
+    <span data-i18n="petProfile.breadcrumb.myPets">My Pets</span>
     <span class="breadcrumb-sep">/</span>
     <span>Luna</span>
   </div>
@@ -225,35 +233,35 @@
     </div>
     <div class="pet-header-info">
       <h1 class="pet-header-name">Luna</h1>
-      <p class="pet-header-breed">Golden Retriever · Female · Born March 2023</p>
+      <p class="pet-header-breed" data-i18n="petProfile.header.breed">Golden Retriever · Female · Born March 2023</p>
       <div class="pet-attrs">
-        <div class="pet-attr"><span>Age</span><strong>3 years</strong></div>
+        <div class="pet-attr"><span data-i18n="petProfile.header.attrAge">Age</span><strong>3 years</strong></div>
         <div class="pet-divider"></div>
-        <div class="pet-attr"><span>Weight</span><strong>24.5 kg</strong></div>
+        <div class="pet-attr"><span data-i18n="petProfile.header.attrWeight">Weight</span><strong>24.5 kg</strong></div>
         <div class="pet-divider"></div>
-        <div class="pet-attr"><span>Colour</span><strong>Golden</strong></div>
+        <div class="pet-attr"><span data-i18n="petProfile.header.attrColour">Colour</span><strong>Golden</strong></div>
         <div class="pet-divider"></div>
-        <div class="pet-attr"><span>Microchip</span><strong>972-0031-XX</strong></div>
+        <div class="pet-attr"><span data-i18n="petProfile.header.attrMicrochip">Microchip</span><strong>972-0031-XX</strong></div>
         <div class="pet-divider"></div>
-        <div class="pet-attr"><span>Owner</span><strong>Samir Abu-Ali</strong></div>
+        <div class="pet-attr"><span data-i18n="petProfile.header.attrOwner">Owner</span><strong>Samir Abu-Ali</strong></div>
       </div>
       <span class="health-status-chip">
         <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor"/></svg>
-        Healthy — last seen Sep 2023
+        <span data-i18n="petProfile.header.healthStatus">Healthy — last seen Sep 2023</span>
       </span>
     </div>
     <div class="pet-header-actions">
-      <a href="book-appointment.html" class="btn-primary">Book Appointment</a>
-      <a href="#" class="btn-ghost">Edit Profile</a>
+      <a href="book-appointment.html" class="btn-primary" data-i18n="petProfile.header.bookBtn">Book Appointment</a>
+      <a href="#" class="btn-ghost" data-i18n="petProfile.header.editBtn">Edit Profile</a>
     </div>
   </div>
 
   <!-- PROFILE TABS -->
   <div class="profile-tabs">
-    <button class="profile-tab active" onclick="switchProfileTab('vaccinations', this)">Vaccinations</button>
-    <button class="profile-tab" onclick="switchProfileTab('medications', this)">Medications</button>
-    <button class="profile-tab" onclick="switchProfileTab('weight', this)">Weight History</button>
-    <button class="profile-tab" onclick="switchProfileTab('notes', this)">Vet Notes</button>
+    <button class="profile-tab active" onclick="switchProfileTab('vaccinations', this)" data-i18n="petProfile.tabs.vaccinations">Vaccinations</button>
+    <button class="profile-tab" onclick="switchProfileTab('medications', this)" data-i18n="petProfile.tabs.medications">Medications</button>
+    <button class="profile-tab" onclick="switchProfileTab('weight', this)" data-i18n="petProfile.tabs.weight">Weight History</button>
+    <button class="profile-tab" onclick="switchProfileTab('notes', this)" data-i18n="petProfile.tabs.notes">Vet Notes</button>
   </div>
 
   <!-- VACCINATIONS -->
@@ -261,11 +269,11 @@
     <table class="data-table">
       <thead>
         <tr>
-          <th>Vaccine</th>
-          <th>Date Given</th>
-          <th>Next Due</th>
-          <th>Veterinarian</th>
-          <th>Status</th>
+          <th data-i18n="petProfile.vaccinations.thVaccine">Vaccine</th>
+          <th data-i18n="petProfile.vaccinations.thDateGiven">Date Given</th>
+          <th data-i18n="petProfile.vaccinations.thNextDue">Next Due</th>
+          <th data-i18n="petProfile.vaccinations.thVet">Veterinarian</th>
+          <th data-i18n="petProfile.vaccinations.thStatus">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -274,35 +282,35 @@
           <td>14 Aug 2026</td>
           <td>14 Aug 2027</td>
           <td>Dr. Hana Khalil</td>
-          <td><span class="tag-given">Up to date</span></td>
+          <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">DHPP (Distemper combo)</strong></td>
           <td>10 Mar 2026</td>
           <td>10 Mar 2027</td>
           <td>Dr. Omar Barakat</td>
-          <td><span class="tag-given">Up to date</span></td>
+          <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Bordetella</strong></td>
           <td>10 Mar 2026</td>
           <td>10 Mar 2027</td>
           <td>Dr. Omar Barakat</td>
-          <td><span class="tag-given">Up to date</span></td>
+          <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Leptospirosis</strong></td>
           <td>15 Sep 2025</td>
           <td>15 Sep 2026</td>
           <td>Dr. Hana Khalil</td>
-          <td><span class="tag-overdue">Due — please book</span></td>
+          <td><span class="tag-overdue" data-i18n="petProfile.vaccinations.statusDue">Due — please book</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Canine Influenza</strong></td>
           <td>—</td>
           <td>—</td>
           <td>—</td>
-          <td><span class="tag-due">Not yet given</span></td>
+          <td><span class="tag-due" data-i18n="petProfile.vaccinations.statusNotGiven">Not yet given</span></td>
         </tr>
       </tbody>
     </table>
@@ -314,16 +322,16 @@
       <div class="med-card">
         <div class="med-name">NexGard Spectra</div>
         <div class="med-generic">Afoxolaner + milbemycin oxime</div>
-        <div class="med-detail"><strong>Dose:</strong> 1 chewable tablet (large dog, 30–60 kg)</div>
-        <div class="med-detail"><strong>Frequency:</strong> Once monthly</div>
-        <div class="med-detail"><strong>Purpose:</strong> Flea, tick & heartworm prevention</div>
-        <div class="med-detail"><strong>Prescribed by:</strong> Dr. Hana Khalil</div>
-        <div class="med-detail"><strong>Refills remaining:</strong> 8</div>
-        <div class="med-status"><span class="tag-active">Active</span></div>
+        <div class="med-detail"><strong data-i18n="petProfile.medications.labelDose">Dose:</strong> 1 chewable tablet (large dog, 30–60 kg)</div>
+        <div class="med-detail"><strong data-i18n="petProfile.medications.labelFrequency">Frequency:</strong> Once monthly</div>
+        <div class="med-detail"><strong data-i18n="petProfile.medications.labelPurpose">Purpose:</strong> Flea, tick &amp; heartworm prevention</div>
+        <div class="med-detail"><strong data-i18n="petProfile.medications.labelPrescribedBy">Prescribed by:</strong> Dr. Hana Khalil</div>
+        <div class="med-detail"><strong data-i18n="petProfile.medications.labelRefills">Refills remaining:</strong> 8</div>
+        <div class="med-status"><span class="tag-active" data-i18n="petProfile.medications.statusActive">Active</span></div>
       </div>
-      <div class="med-card" style="border-style: dashed; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; cursor: pointer; gap: 8px;">
+      <div class="med-card" style="border-style:dashed;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;cursor:pointer;gap:8px;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-        <p style="font-size:var(--text-sm);color:var(--muted);font-weight:500">Add medication</p>
+        <p style="font-size:var(--text-sm);color:var(--muted);font-weight:500" data-i18n="petProfile.medications.addMedication">Add medication</p>
       </div>
     </div>
   </div>
@@ -331,7 +339,7 @@
   <!-- WEIGHT HISTORY -->
   <div class="tab-panel" id="tab-weight">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;">
-      <p style="font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;">Weight over time (kg)</p>
+      <p style="font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;" data-i18n="petProfile.weight.chartLabel">Weight over time (kg)</p>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div class="weight-row">
           <span class="weight-date">Aug 2026</span>
@@ -369,7 +377,7 @@
           <span class="weight-label">11.4 kg</span>
         </div>
       </div>
-      <p style="margin-top:20px;font-size:var(--text-xs);color:var(--muted);">Healthy weight range for female Golden Retriever: 25–32 kg adult. Luna is growing on target.</p>
+      <p style="margin-top:20px;font-size:var(--text-xs);color:var(--muted);" data-i18n="petProfile.weight.healthyNote">Healthy weight range for female Golden Retriever: 25–32 kg adult. Luna is growing on target.</p>
     </div>
   </div>
 
@@ -398,8 +406,8 @@
         <p class="note-text">First Leptospirosis vaccine. Minor swelling at injection site — normal response. Owner was advised to monitor for 24 hours and call if swelling persists or dog appears lethargic. NexGard prescription renewed for 9 months.</p>
       </div>
       <div class="note-add">
-        <textarea placeholder="Add a note for the vet (visible at your next appointment)…"></textarea>
-        <button class="btn-primary" type="button">Save Note</button>
+        <textarea data-i18n-placeholder="petProfile.notes.placeholder" placeholder="Add a note for the vet (visible at your next appointment)…"></textarea>
+        <button class="btn-primary" type="button" data-i18n="petProfile.notes.saveNote">Save Note</button>
       </div>
     </div>
   </div>
@@ -414,5 +422,6 @@ function switchProfileTab(tab, btn) {
   document.getElementById('tab-' + tab).classList.add('active');
 }
 </script>
+<script src="i18n/i18n.js"></script>
 </body>
 </html>

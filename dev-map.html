@@ -1,11 +1,11 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
+<script>(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forpets Vet Clinic — Design Preview</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title data-i18n="devMap.page.title">Forpets Vet Clinic — Design Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 header {
@@ -69,6 +69,9 @@ header {
 .token-swatch { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
 .token-info { font-size: var(--text-xs); color: var(--muted); }
 .token-info strong { display: block; color: var(--fg-2); font-weight: 500; font-size: var(--text-sm); }
+/* Arabic resets */
+[lang="ar"] .screen-num { letter-spacing: 0; text-transform: none; }
+[lang="ar"] .meta-label { letter-spacing: 0; text-transform: none; }
 @media (max-width: 1023px) { .screens-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 639px) {
   header { padding: 40px 16px 32px; }
@@ -82,23 +85,28 @@ header {
 <header>
   <div>
     <div class="logo">For<span>pets</span></div>
-    <p class="tagline">Veterinary Clinic · Dabburiya · 6-Screen Design</p>
+    <p class="tagline" data-i18n="devMap.tagline">Veterinary Clinic · Dabburiya · 6-Screen Design</p>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button class="lang-btn active" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="he">עברית</button>
+    <button class="lang-btn" data-lang="ar">العربية</button>
   </div>
   <div class="meta-block">
-    <p class="meta-label">Design System</p>
-    <p class="meta-value">Warm Editorial</p>
-    <p class="meta-label" style="margin-top:8px">Platform</p>
-    <p class="meta-value">Responsive Web</p>
+    <p class="meta-label" data-i18n="devMap.meta.designSystemLabel">Design System</p>
+    <p class="meta-value" data-i18n="devMap.meta.designSystemValue">Warm Editorial</p>
+    <p class="meta-label" style="margin-top:8px" data-i18n="devMap.meta.platformLabel">Platform</p>
+    <p class="meta-value" data-i18n="devMap.meta.platformValue">Responsive Web</p>
   </div>
 </header>
 <div class="token-strip">
   <div class="token-strip-inner">
-    <div class="token-item"><div class="token-swatch" style="background:#fbf6ee;"></div><div class="token-info"><strong>Background</strong>#fbf6ee</div></div>
-    <div class="token-item"><div class="token-swatch" style="background:#9b5b32;"></div><div class="token-info"><strong>Accent</strong>#9b5b32</div></div>
-    <div class="token-item"><div class="token-swatch" style="background:#201914;"></div><div class="token-info"><strong>Foreground</strong>#201914</div></div>
-    <div class="token-item"><div class="token-swatch" style="background:#4f8a4f;"></div><div class="token-info"><strong>Success</strong>#4f8a4f</div></div>
-    <div class="token-item"><div class="token-swatch" style="background:#f1e3cf;"></div><div class="token-info"><strong>Surface Warm</strong>#f1e3cf</div></div>
-    <div style="margin-left:auto;font-size:var(--text-xs);color:var(--muted);">Georgia display · Inter body · 10–24px radius · No gradients</div>
+    <div class="token-item"><div class="token-swatch" style="background:#fbf6ee;"></div><div class="token-info"><strong data-i18n="devMap.tokens.background">Background</strong>#fbf6ee</div></div>
+    <div class="token-item"><div class="token-swatch" style="background:#9b5b32;"></div><div class="token-info"><strong data-i18n="devMap.tokens.accent">Accent</strong>#9b5b32</div></div>
+    <div class="token-item"><div class="token-swatch" style="background:#201914;"></div><div class="token-info"><strong data-i18n="devMap.tokens.foreground">Foreground</strong>#201914</div></div>
+    <div class="token-item"><div class="token-swatch" style="background:#4f8a4f;"></div><div class="token-info"><strong data-i18n="devMap.tokens.success">Success</strong>#4f8a4f</div></div>
+    <div class="token-item"><div class="token-swatch" style="background:#f1e3cf;"></div><div class="token-info"><strong data-i18n="devMap.tokens.surfaceWarm">Surface Warm</strong>#f1e3cf</div></div>
+    <div style="margin-left:auto;font-size:var(--text-xs);color:var(--muted);" data-i18n="devMap.tokens.fontNote">Georgia display · Inter body · 10–24px radius · No gradients</div>
   </div>
 </div>
 <div class="screens-grid">
@@ -107,11 +115,11 @@ header {
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M32 8C32 8 20 20 12 28C8 32 8 38 12 42C16 46 22 46 26 42L32 36L38 42C42 46 48 46 52 42C56 38 56 32 52 28C44 20 32 8 32 8Z" fill="#9b5b32" opacity="0.45"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 01</div>
-      <div class="screen-title">Home / Landing</div>
-      <div class="screen-desc">Public page: hero headline, 6 service cards, clinic hours, location, dual CTAs for booking and login.</div>
-      <div><span class="screen-tag tag-public">Public</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s01.num">Screen 01</div>
+      <div class="screen-title" data-i18n="devMap.screens.s01.title">Home / Landing</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s01.desc">Public page: hero headline, 6 service cards, clinic hours, location, dual CTAs for booking and login.</div>
+      <div><span class="screen-tag tag-public" data-i18n="devMap.screens.tagPublic">Public</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
   <a href="login.html" class="screen-card">
@@ -119,11 +127,11 @@ header {
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><rect x="10" y="16" width="36" height="28" rx="6" fill="#ded2c3"/><rect x="16" y="24" width="24" height="6" rx="3" fill="#9b5b32" opacity="0.4"/><rect x="16" y="34" width="24" height="6" rx="3" fill="#ded2c3"/><rect x="20" y="42" width="16" height="5" rx="2.5" fill="#9b5b32" opacity="0.7"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 02</div>
-      <div class="screen-title">Login</div>
-      <div class="screen-desc">Tabbed login card: Pet Owner and Clinic Staff tabs. Working form routes to the correct dashboard.</div>
-      <div><span class="screen-tag tag-public">Public</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s02.num">Screen 02</div>
+      <div class="screen-title" data-i18n="devMap.screens.s02.title">Login</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s02.desc">Tabbed login card: Pet Owner and Clinic Staff tabs. Working form routes to the correct dashboard.</div>
+      <div><span class="screen-tag tag-public" data-i18n="devMap.screens.tagPublic">Public</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
   <a href="dashboard-owner.html" class="screen-card">
@@ -131,11 +139,11 @@ header {
       <svg width="56" height="48" viewBox="0 0 56 48" fill="none"><rect x="4" y="6" width="22" height="26" rx="5" fill="#9b5b32" opacity="0.22"/><rect x="30" y="6" width="22" height="26" rx="5" fill="#9b5b32" opacity="0.14"/><rect x="4" y="36" width="48" height="8" rx="3" fill="#ded2c3"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 03</div>
-      <div class="screen-title">Owner Dashboard</div>
-      <div class="screen-desc">Luna + Zaza pet cards, upcoming appointments table, recent activity feed. Links through to profiles.</div>
-      <div><span class="screen-tag tag-owner">Owner</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s03.num">Screen 03</div>
+      <div class="screen-title" data-i18n="devMap.screens.s03.title">Owner Dashboard</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s03.desc">Luna + Zaza pet cards, upcoming appointments table, recent activity feed. Links through to profiles.</div>
+      <div><span class="screen-tag tag-owner" data-i18n="devMap.screens.tagOwner">Owner</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
   <a href="pet-profile.html" class="screen-card">
@@ -143,11 +151,11 @@ header {
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="20" ry="14" fill="#9b5b32" opacity="0.25"/><circle cx="32" cy="28" r="14" fill="#c4946a" opacity="0.55"/><circle cx="27" cy="26" r="2.5" fill="#201914" opacity="0.35"/><circle cx="37" cy="26" r="2.5" fill="#201914" opacity="0.35"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 04</div>
-      <div class="screen-title">Pet Profile — Luna</div>
-      <div class="screen-desc">4 tabs: vaccination history table, NexGard medication card, weight bar chart, tabbed vet notes.</div>
-      <div><span class="screen-tag tag-owner">Owner</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s04.num">Screen 04</div>
+      <div class="screen-title" data-i18n="devMap.screens.s04.title">Pet Profile — Luna</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s04.desc">4 tabs: vaccination history table, NexGard medication card, weight bar chart, tabbed vet notes.</div>
+      <div><span class="screen-tag tag-owner" data-i18n="devMap.screens.tagOwner">Owner</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
   <a href="book-appointment.html" class="screen-card">
@@ -155,11 +163,11 @@ header {
       <svg width="56" height="48" viewBox="0 0 56 48" fill="none"><circle cx="8" cy="24" r="6" fill="#9b5b32"/><line x1="14" y1="24" x2="22" y2="24" stroke="#ded2c3" stroke-width="2"/><circle cx="28" cy="24" r="6" fill="#ded2c3"/><line x1="34" y1="24" x2="42" y2="24" stroke="#ded2c3" stroke-width="2"/><circle cx="48" cy="24" r="6" fill="#ded2c3"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 05</div>
-      <div class="screen-title">Book Appointment</div>
-      <div class="screen-desc">4-step wizard: select pet → service (Vaccine or Surgery only, no emergency) → time slots → confirm.</div>
-      <div><span class="screen-tag tag-owner">Owner</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s05.num">Screen 05</div>
+      <div class="screen-title" data-i18n="devMap.screens.s05.title">Book Appointment</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s05.desc">4-step wizard: select pet → service (Vaccine or Surgery only, no emergency) → time slots → confirm.</div>
+      <div><span class="screen-tag tag-owner" data-i18n="devMap.screens.tagOwner">Owner</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
   <a href="dashboard-staff.html" class="screen-card">
@@ -167,13 +175,14 @@ header {
       <svg width="56" height="48" viewBox="0 0 56 48" fill="none"><rect x="4" y="10" width="48" height="5" rx="2" fill="#9b5b32" opacity="0.5"/><rect x="4" y="20" width="48" height="3" rx="1.5" fill="#ded2c3" opacity="0.2"/><rect x="4" y="27" width="48" height="3" rx="1.5" fill="#ded2c3" opacity="0.15"/><rect x="4" y="34" width="32" height="3" rx="1.5" fill="#ded2c3" opacity="0.1"/></svg>
     </div>
     <div class="screen-info">
-      <div class="screen-num">Screen 06</div>
-      <div class="screen-title">Staff Dashboard</div>
-      <div class="screen-desc">4 tabs: today's schedule by vet, monthly calendar, time-off form + roster, searchable client list.</div>
-      <div><span class="screen-tag tag-staff">Staff only</span></div>
-      <div class="screen-arrow">Open screen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="screen-num" data-i18n="devMap.screens.s06.num">Screen 06</div>
+      <div class="screen-title" data-i18n="devMap.screens.s06.title">Staff Dashboard</div>
+      <div class="screen-desc" data-i18n="devMap.screens.s06.desc">4 tabs: today's schedule by vet, monthly calendar, time-off form + roster, searchable client list.</div>
+      <div><span class="screen-tag tag-staff" data-i18n="devMap.screens.tagStaff">Staff only</span></div>
+      <div class="screen-arrow"><span data-i18n="devMap.screens.openScreen">Open screen</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </a>
 </div>
+<script src="i18n/i18n.js"></script>
 </body>
 </html>

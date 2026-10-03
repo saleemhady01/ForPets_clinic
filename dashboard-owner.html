@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
+<script>(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Dashboard — Forpets</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title data-i18n="ownerDash.page.title">My Dashboard — Forpets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* APP NAV */
@@ -288,12 +289,6 @@
   white-space: nowrap;
 }
 .appt-action:hover { border-bottom-color: var(--accent); }
-.empty-row td {
-  text-align: center;
-  padding: 48px var(--space-6);
-  color: var(--muted);
-  font-style: italic;
-}
 
 /* RECENT ACTIVITY */
 .activity-list { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -320,6 +315,10 @@
 .activity-text strong { color: var(--fg); font-weight: 500; }
 .activity-time { margin-left: auto; font-size: var(--text-xs); color: var(--muted); white-space: nowrap; padding-top: 2px; }
 
+/* Arabic resets */
+[lang="ar"] .greeting-label { letter-spacing: 0; text-transform: none; }
+[lang="ar"] .appt-table th { letter-spacing: 0; text-transform: none; }
+
 /* MOBILE */
 .mobile-nav { display: none; }
 @media (max-width: 767px) {
@@ -343,16 +342,21 @@
   <div class="nav-inner">
     <a href="home.html" class="nav-logo">For<span>pets</span></a>
     <ul class="nav-menu">
-      <li><a href="dashboard-owner.html" class="active">Dashboard</a></li>
-      <li><a href="pet-profile.html">My Pets</a></li>
-      <li><a href="book-appointment.html">Book Appointment</a></li>
+      <li><a href="dashboard-owner.html" class="active" data-i18n="ownerDash.nav.dashboard">Dashboard</a></li>
+      <li><a href="pet-profile.html" data-i18n="ownerDash.nav.myPets">My Pets</a></li>
+      <li><a href="book-appointment.html" data-i18n="ownerDash.nav.bookAppointment">Book Appointment</a></li>
     </ul>
     <div class="nav-user">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="he">עברית</button>
+        <button class="lang-btn" data-lang="ar">العربية</button>
+      </div>
       <div class="avatar">SA</div>
       <span class="nav-user-name">Samir Abu-Ali</span>
-      <a href="login.html" class="btn-logout">Log out</a>
+      <a href="login.html" class="btn-logout" data-i18n="ownerDash.nav.logOut">Log out</a>
     </div>
-    <button class="mobile-menu-btn" aria-label="Menu">
+    <button class="mobile-menu-btn" data-i18n-aria="ownerDash.nav.menuAriaLabel" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
@@ -363,17 +367,17 @@
   <!-- HEADER -->
   <div class="page-header">
     <div>
-      <p class="greeting-label">Friday, 11 September 2026</p>
-      <h1 class="greeting-name">Good morning, Samir</h1>
-      <p class="greeting-meta">Forpets Veterinary Clinic · Dabburiya</p>
+      <p class="greeting-label" data-i18n="ownerDash.greeting.label">Friday, 11 September 2026</p>
+      <h1 class="greeting-name" data-i18n="ownerDash.greeting.name">Good morning, Samir</h1>
+      <p class="greeting-meta" data-i18n="ownerDash.greeting.meta">Forpets Veterinary Clinic · Dabburiya</p>
     </div>
-    <a href="book-appointment.html" class="btn-primary">+ Book Appointment</a>
+    <a href="book-appointment.html" class="btn-primary" data-i18n="ownerDash.bookBtn">+ Book Appointment</a>
   </div>
 
   <!-- PETS SECTION -->
   <div class="section-row">
-    <h2 class="section-title">Your Pets</h2>
-    <a href="pet-profile.html" class="see-all">See all →</a>
+    <h2 class="section-title" data-i18n="ownerDash.pets.title">Your Pets</h2>
+    <a href="pet-profile.html" class="see-all" data-i18n="ownerDash.pets.seeAll">See all →</a>
   </div>
   <div class="pets-grid">
 
@@ -387,19 +391,19 @@
           <circle cx="28" cy="26" r="2" fill="#201914"/>
           <circle cx="36" cy="26" r="2" fill="#201914"/>
         </svg>
-        <span class="pet-species-badge">Dog</span>
+        <span class="pet-species-badge" data-i18n="ownerDash.pets.speciesDog">Dog</span>
       </div>
       <div class="pet-info">
         <div class="pet-name">Luna</div>
         <div class="pet-breed">Golden Retriever · Female · 3 yrs</div>
         <div class="pet-stats">
-          <div class="pet-stat"><strong>24.5 kg</strong> Weight</div>
-          <div class="pet-stat"><strong>Sep 2023</strong> Last visit</div>
-          <div class="pet-stat"><strong>Rabies</strong> Last vaccine</div>
-          <div class="pet-stat"><strong>None</strong> Medications</div>
+          <div class="pet-stat"><strong>24.5 kg</strong> <span data-i18n="ownerDash.pets.statWeight">Weight</span></div>
+          <div class="pet-stat"><strong>Sep 2023</strong> <span data-i18n="ownerDash.pets.statLastVisit">Last visit</span></div>
+          <div class="pet-stat"><strong>Rabies</strong> <span data-i18n="ownerDash.pets.statLastVaccine">Last vaccine</span></div>
+          <div class="pet-stat"><strong>None</strong> <span data-i18n="ownerDash.pets.statMedications">Medications</span></div>
         </div>
         <div class="pet-cta">
-          View profile
+          <span data-i18n="ownerDash.pets.viewProfile">View profile</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
       </div>
@@ -415,19 +419,19 @@
           <circle cx="28" cy="25" r="2" fill="#201914"/>
           <circle cx="36" cy="25" r="2" fill="#201914"/>
         </svg>
-        <span class="pet-species-badge">Cat</span>
+        <span class="pet-species-badge" data-i18n="ownerDash.pets.speciesCat">Cat</span>
       </div>
       <div class="pet-info">
         <div class="pet-name">Zaza</div>
         <div class="pet-breed">Domestic Shorthair · Male · 5 yrs</div>
         <div class="pet-stats">
-          <div class="pet-stat"><strong>4.8 kg</strong> Weight</div>
-          <div class="pet-stat"><strong>Jul 2026</strong> Last visit</div>
-          <div class="pet-stat"><strong>FVRCP</strong> Last vaccine</div>
-          <div class="pet-stat"><strong>1 active</strong> Medications</div>
+          <div class="pet-stat"><strong>4.8 kg</strong> <span data-i18n="ownerDash.pets.statWeight">Weight</span></div>
+          <div class="pet-stat"><strong>Jul 2026</strong> <span data-i18n="ownerDash.pets.statLastVisit">Last visit</span></div>
+          <div class="pet-stat"><strong>FVRCP</strong> <span data-i18n="ownerDash.pets.statLastVaccine">Last vaccine</span></div>
+          <div class="pet-stat"><strong>1 active</strong> <span data-i18n="ownerDash.pets.statMedications">Medications</span></div>
         </div>
         <div class="pet-cta">
-          View profile
+          <span data-i18n="ownerDash.pets.viewProfile">View profile</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
       </div>
@@ -435,24 +439,24 @@
 
     <a href="#" class="add-pet-card">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-      <p>Add another pet</p>
+      <p data-i18n="ownerDash.pets.addAnother">Add another pet</p>
     </a>
 
   </div>
 
   <!-- UPCOMING APPOINTMENTS -->
   <div class="section-row">
-    <h2 class="section-title">Upcoming Appointments</h2>
-    <a href="book-appointment.html" class="see-all">Book new →</a>
+    <h2 class="section-title" data-i18n="ownerDash.appointments.title">Upcoming Appointments</h2>
+    <a href="book-appointment.html" class="see-all" data-i18n="ownerDash.appointments.bookNew">Book new →</a>
   </div>
   <table class="appt-table">
     <thead>
       <tr>
-        <th>Date & Time</th>
-        <th>Pet</th>
-        <th>Service</th>
-        <th>Veterinarian</th>
-        <th>Status</th>
+        <th data-i18n="ownerDash.appointments.thDateTime">Date &amp; Time</th>
+        <th data-i18n="ownerDash.appointments.thPet">Pet</th>
+        <th data-i18n="ownerDash.appointments.thService">Service</th>
+        <th data-i18n="ownerDash.appointments.thVet">Veterinarian</th>
+        <th data-i18n="ownerDash.appointments.thStatus">Status</th>
         <th></th>
       </tr>
     </thead>
@@ -463,10 +467,10 @@
           <span>10:30 AM</span>
         </td>
         <td><span class="pet-pill">🐕 Luna</span></td>
-        <td>Vaccine Appointment</td>
+        <td data-i18n="ownerDash.appointments.vaccineAppt">Vaccine Appointment</td>
         <td>Dr. Hana Khalil</td>
-        <td><span class="status-badge status-confirmed">Confirmed</span></td>
-        <td><a href="#" class="appt-action">Manage</a></td>
+        <td><span class="status-badge status-confirmed" data-i18n="ownerDash.appointments.statusConfirmed">Confirmed</span></td>
+        <td><a href="#" class="appt-action" data-i18n="ownerDash.appointments.manage">Manage</a></td>
       </tr>
       <tr>
         <td class="appt-date">
@@ -474,17 +478,17 @@
           <span>2:00 PM</span>
         </td>
         <td><span class="pet-pill">🐈 Zaza</span></td>
-        <td>Surgery Consultation</td>
+        <td data-i18n="ownerDash.appointments.surgeryConsult">Surgery Consultation</td>
         <td>Dr. Omar Barakat</td>
-        <td><span class="status-badge status-pending">Pending</span></td>
-        <td><a href="#" class="appt-action">Manage</a></td>
+        <td><span class="status-badge status-pending" data-i18n="ownerDash.appointments.statusPending">Pending</span></td>
+        <td><a href="#" class="appt-action" data-i18n="ownerDash.appointments.manage">Manage</a></td>
       </tr>
     </tbody>
   </table>
 
   <!-- RECENT ACTIVITY -->
   <div class="section-row">
-    <h2 class="section-title">Recent Activity</h2>
+    <h2 class="section-title" data-i18n="ownerDash.activity.title">Recent Activity</h2>
   </div>
   <div class="activity-list">
     <div class="activity-item">
@@ -506,5 +510,6 @@
 
 </div>
 
+<script src="i18n/i18n.js"></script>
 </body>
 </html>

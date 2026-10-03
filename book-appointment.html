@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
+<script>(function(){var l=localStorage.getItem('fp-lang');if(l==='he'||l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang=l;}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Appointment — Forpets</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title data-i18n="booking.page.title">Book Appointment — Forpets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* APP NAV */
@@ -334,10 +335,17 @@
 <nav class="app-nav">
   <div class="nav-inner">
     <a href="home.html" class="nav-logo">For<span>pets</span></a>
-    <a href="dashboard-owner.html" class="nav-back">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Back to dashboard
-    </a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="he">עברית</button>
+        <button class="lang-btn" data-lang="ar">العربية</button>
+      </div>
+      <a href="dashboard-owner.html" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span data-i18n="booking.nav.back">Back to dashboard</span>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -346,19 +354,19 @@
     <div class="progress-line"></div>
     <div class="step-item active" id="prog-1">
       <div class="step-circle">1</div>
-      <span class="step-label">Select Pet</span>
+      <span class="step-label" data-i18n="booking.progress.selectPet">Select Pet</span>
     </div>
     <div class="step-item" id="prog-2">
       <div class="step-circle">2</div>
-      <span class="step-label">Service</span>
+      <span class="step-label" data-i18n="booking.progress.service">Service</span>
     </div>
     <div class="step-item" id="prog-3">
       <div class="step-circle">3</div>
-      <span class="step-label">Date & Time</span>
+      <span class="step-label" data-i18n="booking.progress.dateTime">Date &amp; Time</span>
     </div>
     <div class="step-item" id="prog-4">
       <div class="step-circle">4</div>
-      <span class="step-label">Confirm</span>
+      <span class="step-label" data-i18n="booking.progress.confirm">Confirm</span>
     </div>
   </div>
 </div>
@@ -367,8 +375,8 @@
 
   <!-- STEP 1: SELECT PET -->
   <div class="step-panel active" id="step-1">
-    <h1 class="step-heading">Which pet is this for?</h1>
-    <p class="step-sub">Select a pet from your registered animals, or add a new one.</p>
+    <h1 class="step-heading" data-i18n="booking.step1.heading">Which pet is this for?</h1>
+    <p class="step-sub" data-i18n="booking.step1.sub">Select a pet from your registered animals, or add a new one.</p>
     <div class="radio-grid radio-grid-1">
       <label class="radio-card" onclick="selectCard(this, 'pet')">
         <input type="radio" name="pet" value="luna">
@@ -381,8 +389,8 @@
         </div>
         <div class="radio-card-content">
           <div class="radio-card-name">Luna</div>
-          <div class="radio-card-desc">Golden Retriever · Female · 3 years</div>
-          <div class="radio-card-meta">Last visit: Sep 2023</div>
+          <div class="radio-card-desc" data-i18n="booking.step1.lunaDesc">Golden Retriever · Female · 3 years</div>
+          <div class="radio-card-meta" data-i18n="booking.step1.lunaLastVisit">Last visit: Sep 2023</div>
         </div>
       </label>
       <label class="radio-card" onclick="selectCard(this, 'pet')">
@@ -396,8 +404,8 @@
         </div>
         <div class="radio-card-content">
           <div class="radio-card-name">Zaza</div>
-          <div class="radio-card-desc">Domestic Shorthair · Male · 5 years</div>
-          <div class="radio-card-meta">Last visit: Jul 2026</div>
+          <div class="radio-card-desc" data-i18n="booking.step1.zazaDesc">Domestic Shorthair · Male · 5 years</div>
+          <div class="radio-card-meta" data-i18n="booking.step1.zazaLastVisit">Last visit: Jul 2026</div>
         </div>
       </label>
       <label class="radio-card" style="border-style:dashed;background:var(--bg);" onclick="selectCard(this, 'pet')">
@@ -407,21 +415,21 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
         </div>
         <div class="radio-card-content">
-          <div class="radio-card-name" style="color:var(--muted);">Add a new pet</div>
-          <div class="radio-card-desc">Register a new animal to your account</div>
+          <div class="radio-card-name" style="color:var(--muted);" data-i18n="booking.step1.addPetName">Add a new pet</div>
+          <div class="radio-card-desc" data-i18n="booking.step1.addPetDesc">Register a new animal to your account</div>
         </div>
       </label>
     </div>
     <div class="step-actions">
       <span></span>
-      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" disabled>Continue</button>
+      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" disabled data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
   <!-- STEP 2: SERVICE -->
   <div class="step-panel" id="step-2">
-    <h1 class="step-heading">What type of appointment?</h1>
-    <p class="step-sub">Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.</p>
+    <h1 class="step-heading" data-i18n="booking.step2.heading">What type of appointment?</h1>
+    <p class="step-sub" data-i18n="booking.step2.sub">Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.</p>
     <div class="radio-grid radio-grid-1">
       <label class="radio-card" onclick="selectCard(this, 'service')">
         <input type="radio" name="service" value="vaccine">
@@ -432,9 +440,9 @@
           </svg>
         </div>
         <div class="radio-card-content">
-          <div class="radio-card-name">Vaccine Appointment</div>
-          <div class="radio-card-desc">Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.</div>
-          <div class="radio-card-meta">Typically 20–30 min · Online booking available</div>
+          <div class="radio-card-name" data-i18n="booking.step2.vaccineTitle">Vaccine Appointment</div>
+          <div class="radio-card-desc" data-i18n="booking.step2.vaccineDesc">Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.</div>
+          <div class="radio-card-meta" data-i18n="booking.step2.vaccineMeta">Typically 20–30 min · Online booking available</div>
         </div>
       </label>
       <label class="radio-card" onclick="selectCard(this, 'service')">
@@ -446,9 +454,9 @@
           </svg>
         </div>
         <div class="radio-card-content">
-          <div class="radio-card-name">Surgery Consultation</div>
-          <div class="radio-card-desc">Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.</div>
-          <div class="radio-card-meta">Typically 45–60 min · Online booking available</div>
+          <div class="radio-card-name" data-i18n="booking.step2.surgeryTitle">Surgery Consultation</div>
+          <div class="radio-card-desc" data-i18n="booking.step2.surgeryDesc">Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.</div>
+          <div class="radio-card-meta" data-i18n="booking.step2.surgeryMeta">Typically 45–60 min · Online booking available</div>
         </div>
       </label>
       <div class="radio-card" style="opacity:0.5;cursor:default;background:var(--bg);border-style:dashed;">
@@ -457,30 +465,30 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
         </div>
         <div class="radio-card-content">
-          <div class="radio-card-name" style="color:var(--muted)">Emergency — Phone Only</div>
-          <div class="radio-card-desc">Emergency cases cannot be booked online. Please call +972-XX-XXX-XXXX directly.</div>
+          <div class="radio-card-name" style="color:var(--muted)" data-i18n="booking.step2.emergencyTitle">Emergency — Phone Only</div>
+          <div class="radio-card-desc" data-i18n="booking.step2.emergencyDesc">Emergency cases cannot be booked online. Please call +972-XX-XXX-XXXX directly.</div>
         </div>
       </div>
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(2)">← Back</button>
-      <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled>Continue</button>
+      <button class="btn-back" onclick="prevStep(2)" data-i18n="booking.back">← Back</button>
+      <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
   <!-- STEP 3: DATE & TIME -->
   <div class="step-panel" id="step-3">
-    <h1 class="step-heading">Choose a date and time</h1>
-    <p class="step-sub">Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.</p>
+    <h1 class="step-heading" data-i18n="booking.step3.heading">Choose a date and time</h1>
+    <p class="step-sub" data-i18n="booking.step3.sub">Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.</p>
     <div class="date-grid">
       <div class="date-picker-section">
-        <label for="appt-date">Preferred date</label>
+        <label for="appt-date" data-i18n="booking.step3.preferredDate">Preferred date</label>
         <input type="date" class="date-input" id="appt-date" min="2026-09-12" value="2026-09-15" onchange="updateSlots(this.value)">
       </div>
       <div class="date-picker-section">
-        <label>Veterinarian preference</label>
+        <label data-i18n="booking.step3.vetPreference">Veterinarian preference</label>
         <select class="date-input" style="cursor:pointer;appearance:auto;">
-          <option>No preference</option>
+          <option data-i18n="booking.step3.noPreference">No preference</option>
           <option>Dr. Hana Khalil</option>
           <option>Dr. Omar Barakat</option>
           <option>Dr. Laila Nassar</option>
@@ -508,37 +516,37 @@
     </div>
     <p class="availability-note">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="var(--muted)" stroke-width="1.5"/><path d="M6 4v3M6 8.5v.5" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
-      Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve.
+      <span data-i18n="booking.step3.slotsNote">Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve.</span>
     </p>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(3)">← Back</button>
-      <button class="btn-next" onclick="nextStep(3)" id="btn-next-3" disabled>Continue</button>
+      <button class="btn-back" onclick="prevStep(3)" data-i18n="booking.back">← Back</button>
+      <button class="btn-next" onclick="nextStep(3)" id="btn-next-3" disabled data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
   <!-- STEP 4: CONFIRM -->
   <div class="step-panel" id="step-4">
-    <h1 class="step-heading">Confirm your booking</h1>
-    <p class="step-sub">Please review the details below. A confirmation will be sent to your email.</p>
+    <h1 class="step-heading" data-i18n="booking.step4.heading">Confirm your booking</h1>
+    <p class="step-sub" data-i18n="booking.step4.sub">Please review the details below. A confirmation will be sent to your email.</p>
     <div class="confirm-card">
       <div class="confirm-header">
         <div class="confirm-header-title" id="confirm-service-title">Vaccine Appointment</div>
       </div>
       <div class="confirm-rows">
-        <div class="confirm-row"><span class="confirm-row-label">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna — Golden Retriever</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-value" id="confirm-time">—</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Veterinarian</span><span class="confirm-row-value">Dr. Hana Khalil</span></div>
-        <div class="confirm-row"><span class="confirm-row-label">Clinic</span><span class="confirm-row-value">Forpets Veterinary Clinic, Dabburiya</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelPet">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna — Golden Retriever</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelService">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelDate">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelTime">Time</span><span class="confirm-row-value" id="confirm-time">—</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelVet">Veterinarian</span><span class="confirm-row-value" data-i18n="booking.step4.vetValue">Dr. Hana Khalil</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelClinic">Clinic</span><span class="confirm-row-value" data-i18n="booking.step4.clinicValue">Forpets Veterinary Clinic, Dabburiya</span></div>
       </div>
     </div>
-    <div class="confirm-notice">
+    <div class="confirm-notice" data-i18n="booking.step4.cancellationNotice">
       <strong>Cancellation policy:</strong> Please cancel or reschedule at least 24 hours before your appointment. For same-day changes, call the clinic directly.
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(4)">← Back</button>
-      <button class="btn-next" onclick="confirmBooking()">Confirm Appointment</button>
+      <button class="btn-back" onclick="prevStep(4)" data-i18n="booking.back">← Back</button>
+      <button class="btn-next" onclick="confirmBooking()" data-i18n="booking.step4.confirmBtn">Confirm Appointment</button>
     </div>
   </div>
 
@@ -548,11 +556,11 @@
       <div class="success-icon">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
       </div>
-      <h1 class="success-title">You're booked!</h1>
-      <p class="success-sub">Your appointment has been confirmed. A reminder will be sent to your email 24 hours before.</p>
+      <h1 class="success-title" data-i18n="booking.success.title">You're booked!</h1>
+      <p class="success-sub" data-i18n="booking.success.sub">Your appointment has been confirmed. A reminder will be sent to your email 24 hours before.</p>
       <div class="success-actions">
-        <a href="dashboard-owner.html" class="btn-secondary">Back to Dashboard</a>
-        <a href="pet-profile.html" class="btn-outline">View Luna's Profile</a>
+        <a href="dashboard-owner.html" class="btn-secondary" data-i18n="booking.success.backToDashboard">Back to Dashboard</a>
+        <a href="pet-profile.html" class="btn-outline" data-i18n="booking.success.viewProfile">View Luna's Profile</a>
       </div>
     </div>
   </div>
@@ -641,5 +649,6 @@ function updateSlots(val) {
   document.getElementById('btn-next-3').disabled = true;
 }
 </script>
+<script src="i18n/i18n.js"></script>
 </body>
 </html>
