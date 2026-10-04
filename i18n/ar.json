@@ -56,6 +56,7 @@
     "links": { "services": "Services", "portal": "Owner Portal", "contact": "Contact" },
     "copy": "© 2026 Forpets Veterinary Clinic, Dabburiya"
   },
+  "apptDuration": "{dur} min",
 
   "login": {
     "page": { "title": "Login — Forpets Veterinary Clinic" },
@@ -94,21 +95,12 @@
     "page": { "title": "Book Appointment — Forpets" },
     "nav": { "back": "Back to dashboard" },
     "progress": {
-      "selectPet": "Select Pet",
       "service": "Service",
       "dateTime": "Date &amp; Time",
       "confirm": "Confirm"
     },
     "back": "← Back",
     "continue": "Continue",
-    "step1": {
-      "heading": "Which pet is this for?",
-      "sub": "Select a pet for this appointment, or skip to continue without one.",
-      "lunaDesc": "Golden Retriever · Female · 3 years",
-      "lunaLastVisit": "Last visit: Sep 2023",
-      "zazaDesc": "Domestic Shorthair · Male · 5 years",
-      "zazaLastVisit": "Last visit: Jul 2026"
-    },
     "step2": {
       "heading": "What type of appointment?",
       "sub": "Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.",
@@ -130,7 +122,6 @@
     "step4": {
       "heading": "Confirm your booking",
       "sub": "Please review the details below.",
-      "labelPet": "Pet",
       "labelService": "Service",
       "labelDate": "Date",
       "labelTime": "Time",
@@ -142,8 +133,7 @@
     "success": {
       "title": "You're booked!",
       "sub": "Your appointment is confirmed.",
-      "backToDashboard": "Back to Dashboard",
-      "viewProfile": "View Luna's Profile"
+      "backToDashboard": "Back to Dashboard"
     }
   },
 

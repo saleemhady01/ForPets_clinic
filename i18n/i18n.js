@@ -51,9 +51,10 @@
       if (val !== undefined) el.setAttribute('placeholder', val);
     });
 
-    /* appointment duration elements — set to APPT_DURATION + " min" */
+    /* appointment duration elements — label text comes from apptDuration key */
     document.querySelectorAll('[data-appt-duration]').forEach(function (el) {
-      el.textContent = APPT_DURATION + ' min';
+      var durLabel = get(strings, 'apptDuration');
+      el.textContent = durLabel ? String(durLabel).replace(/\{dur\}/g, APPT_DURATION) : APPT_DURATION + ' min';
     });
 
     /* direction + lang attribute on <html> */

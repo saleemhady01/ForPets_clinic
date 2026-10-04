@@ -354,18 +354,14 @@
     <div class="progress-line"></div>
     <div class="step-item active" id="prog-1">
       <div class="step-circle">1</div>
-      <span class="step-label" data-i18n="booking.progress.selectPet">Select Pet</span>
+      <span class="step-label" data-i18n="booking.progress.service">Service</span>
     </div>
     <div class="step-item" id="prog-2">
       <div class="step-circle">2</div>
-      <span class="step-label" data-i18n="booking.progress.service">Service</span>
+      <span class="step-label" data-i18n="booking.progress.dateTime">Date &amp; Time</span>
     </div>
     <div class="step-item" id="prog-3">
       <div class="step-circle">3</div>
-      <span class="step-label" data-i18n="booking.progress.dateTime">Date &amp; Time</span>
-    </div>
-    <div class="step-item" id="prog-4">
-      <div class="step-circle">4</div>
       <span class="step-label" data-i18n="booking.progress.confirm">Confirm</span>
     </div>
   </div>
@@ -373,50 +369,8 @@
 
 <div class="booking-main">
 
-  <!-- STEP 1: SELECT PET -->
+  <!-- STEP 1: SERVICE -->
   <div class="step-panel active" id="step-1">
-    <h1 class="step-heading" data-i18n="booking.step1.heading">Which pet is this for?</h1>
-    <p class="step-sub" data-i18n="booking.step1.sub">Select a pet for this appointment, or skip to continue without one.</p>
-    <div class="radio-grid radio-grid-1">
-      <label class="radio-card" onclick="selectCard(this, 'pet')">
-        <input type="radio" name="pet" value="luna">
-        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
-        <div class="radio-card-icon">
-          <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
-            <ellipse cx="32" cy="44" rx="16" ry="12" fill="#9b5b32"/>
-            <circle cx="32" cy="28" r="14" fill="#c4946a"/>
-          </svg>
-        </div>
-        <div class="radio-card-content">
-          <div class="radio-card-name">Luna</div>
-          <div class="radio-card-desc" data-i18n="booking.step1.lunaDesc">Golden Retriever · Female · 3 years</div>
-          <div class="radio-card-meta" data-i18n="booking.step1.lunaLastVisit">Last visit: Sep 2023</div>
-        </div>
-      </label>
-      <label class="radio-card" onclick="selectCard(this, 'pet')">
-        <input type="radio" name="pet" value="zaza">
-        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
-        <div class="radio-card-icon" style="background:#e8f0ea;">
-          <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
-            <ellipse cx="32" cy="44" rx="14" ry="10" fill="#4f8a4f"/>
-            <circle cx="32" cy="26" r="12" fill="#6aaa6a"/>
-          </svg>
-        </div>
-        <div class="radio-card-content">
-          <div class="radio-card-name">Zaza</div>
-          <div class="radio-card-desc" data-i18n="booking.step1.zazaDesc">Domestic Shorthair · Male · 5 years</div>
-          <div class="radio-card-meta" data-i18n="booking.step1.zazaLastVisit">Last visit: Jul 2026</div>
-        </div>
-      </label>
-    </div>
-    <div class="step-actions">
-      <span></span>
-      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" data-i18n="booking.continue">Continue</button>
-    </div>
-  </div>
-
-  <!-- STEP 2: SERVICE -->
-  <div class="step-panel" id="step-2">
     <h1 class="step-heading" data-i18n="booking.step2.heading">What type of appointment?</h1>
     <p class="step-sub" data-i18n="booking.step2.sub">Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.</p>
     <div class="radio-grid radio-grid-1">
@@ -431,7 +385,7 @@
         <div class="radio-card-content">
           <div class="radio-card-name" data-i18n="booking.step2.vaccineTitle">Vaccine Appointment</div>
           <div class="radio-card-desc" data-i18n="booking.step2.vaccineDesc">Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.</div>
-          <div class="radio-card-meta" data-i18n="booking.step2.vaccineMeta">Typically 20–30 min · Online booking available</div>
+          <div class="radio-card-meta" data-i18n="booking.step2.vaccineMeta">{dur} min · Online booking available</div>
         </div>
       </label>
       <label class="radio-card" onclick="selectCard(this, 'service')">
@@ -445,7 +399,7 @@
         <div class="radio-card-content">
           <div class="radio-card-name" data-i18n="booking.step2.surgeryTitle">Surgery Consultation</div>
           <div class="radio-card-desc" data-i18n="booking.step2.surgeryDesc">Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.</div>
-          <div class="radio-card-meta" data-i18n="booking.step2.surgeryMeta">Typically 45–60 min · Online booking available</div>
+          <div class="radio-card-meta" data-i18n="booking.step2.surgeryMeta">{dur} min · Online booking available</div>
         </div>
       </label>
       <div class="radio-card" style="opacity:0.5;cursor:default;background:var(--bg);border-style:dashed;">
@@ -460,13 +414,13 @@
       </div>
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(2)" data-i18n="booking.back">← Back</button>
-      <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled data-i18n="booking.continue">Continue</button>
+      <span></span>
+      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" disabled data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
-  <!-- STEP 3: DATE & TIME -->
-  <div class="step-panel" id="step-3">
+  <!-- STEP 2: DATE & TIME -->
+  <div class="step-panel" id="step-2">
     <h1 class="step-heading" data-i18n="booking.step3.heading">Choose a date and time</h1>
     <p class="step-sub" data-i18n="booking.step3.sub">Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.</p>
     <div class="date-picker-section" style="margin-bottom:32px;">
@@ -494,16 +448,16 @@
     </div>
     <p class="availability-note">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="var(--muted)" stroke-width="1.5"/><path d="M6 4v3M6 8.5v.5" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span data-i18n="booking.step3.slotsNote">Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve.</span>
+      <span data-i18n="booking.step3.slotsNote">Grey slots are already booked. Select to reserve.</span>
     </p>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(3)" data-i18n="booking.back">← Back</button>
-      <button class="btn-next" onclick="nextStep(3)" id="btn-next-3" disabled data-i18n="booking.continue">Continue</button>
+      <button class="btn-back" onclick="prevStep(2)" data-i18n="booking.back">← Back</button>
+      <button class="btn-next" onclick="nextStep(2)" id="btn-next-2" disabled data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
-  <!-- STEP 4: CONFIRM -->
-  <div class="step-panel" id="step-4">
+  <!-- STEP 3: CONFIRM -->
+  <div class="step-panel" id="step-3">
     <h1 class="step-heading" data-i18n="booking.step4.heading">Confirm your booking</h1>
     <p class="step-sub" data-i18n="booking.step4.sub">Please review the details below.</p>
     <div class="confirm-card">
@@ -511,7 +465,6 @@
         <div class="confirm-header-title" id="confirm-service-title">Vaccine Appointment</div>
       </div>
       <div class="confirm-rows">
-        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelPet">Pet</span><span class="confirm-row-value" id="confirm-pet">—</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelService">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelDate">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelTime">Time</span><span class="confirm-row-value" id="confirm-time">—</span></div>
@@ -522,7 +475,7 @@
       <strong>Cancellation policy:</strong> Please cancel or reschedule at least 24 hours before your appointment. For same-day changes, call the clinic directly.
     </div>
     <div class="step-actions">
-      <button class="btn-back" onclick="prevStep(4)" data-i18n="booking.back">← Back</button>
+      <button class="btn-back" onclick="prevStep(3)" data-i18n="booking.back">← Back</button>
       <button class="btn-next" onclick="confirmBooking()" data-i18n="booking.step4.confirmBtn">Confirm Appointment</button>
     </div>
   </div>
@@ -534,10 +487,9 @@
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
       </div>
       <h1 class="success-title" data-i18n="booking.success.title">You're booked!</h1>
-      <p class="success-sub" data-i18n="booking.success.sub">Your appointment has been confirmed. A reminder will be sent to your email 24 hours before.</p>
+      <p class="success-sub" data-i18n="booking.success.sub">Your appointment is confirmed.</p>
       <div class="success-actions">
         <a href="dashboard-owner.html" class="btn-secondary" data-i18n="booking.success.backToDashboard">Back to Dashboard</a>
-        <a href="pet-profile.html" class="btn-outline" data-i18n="booking.success.viewProfile">View Luna's Profile</a>
       </div>
     </div>
   </div>
@@ -546,7 +498,7 @@
 
 <script>
 let currentStep = 1;
-const selections = { pet: null, service: null, time: null };
+const selections = { service: null, time: null };
 
 function selectCard(el, type) {
   el.closest('.radio-grid').querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
@@ -554,8 +506,7 @@ function selectCard(el, type) {
   const radio = el.querySelector('input[type="radio"]');
   if (radio) radio.checked = true;
   selections[type] = radio ? radio.value : type;
-  const btnId = type === 'pet' ? 'btn-next-1' : 'btn-next-2';
-  const btn = document.getElementById(btnId);
+  const btn = document.getElementById('btn-next-1');
   if (btn) btn.disabled = false;
   updateConfirm();
 }
@@ -564,16 +515,12 @@ function selectTime(el) {
   document.querySelectorAll('.time-slot.selected').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
   selections.time = el.textContent.trim();
-  document.getElementById('btn-next-3').disabled = false;
+  document.getElementById('btn-next-2').disabled = false;
   updateConfirm();
 }
 
 function updateConfirm() {
-  const petNames = { luna: 'Luna — Golden Retriever', zaza: 'Zaza — Domestic Shorthair' };
   const serviceNames = { vaccine: 'Vaccine Appointment', surgery: 'Surgery Consultation' };
-  if (document.getElementById('confirm-pet')) {
-    document.getElementById('confirm-pet').textContent = selections.pet ? (petNames[selections.pet] || selections.pet) : '—';
-  }
   if (selections.service) {
     const sn = serviceNames[selections.service] || selections.service;
     document.getElementById('confirm-service').textContent = sn;
@@ -607,7 +554,7 @@ function prevStep(from) {
 }
 
 function confirmBooking() {
-  document.getElementById('step-4').classList.remove('active');
+  document.getElementById('step-3').classList.remove('active');
   document.getElementById('step-success').classList.add('active');
   document.querySelectorAll('.step-item').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -623,7 +570,7 @@ function updateSlots(val) {
   document.querySelector('.time-slots-label').textContent = 'Available time slots — ' + label;
   document.querySelectorAll('.time-slot.selected').forEach(t => t.classList.remove('selected'));
   selections.time = null;
-  document.getElementById('btn-next-3').disabled = true;
+  document.getElementById('btn-next-2').disabled = true;
 }
 </script>
 <script src="i18n/i18n.js"></script>
