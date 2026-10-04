@@ -376,7 +376,7 @@
   <!-- STEP 1: SELECT PET -->
   <div class="step-panel active" id="step-1">
     <h1 class="step-heading" data-i18n="booking.step1.heading">Which pet is this for?</h1>
-    <p class="step-sub" data-i18n="booking.step1.sub">Select a pet from your registered animals, or add a new one.</p>
+    <p class="step-sub" data-i18n="booking.step1.sub">Select a pet for this appointment, or skip to continue without one.</p>
     <div class="radio-grid radio-grid-1">
       <label class="radio-card" onclick="selectCard(this, 'pet')">
         <input type="radio" name="pet" value="luna">
@@ -408,21 +408,10 @@
           <div class="radio-card-meta" data-i18n="booking.step1.zazaLastVisit">Last visit: Jul 2026</div>
         </div>
       </label>
-      <label class="radio-card" style="border-style:dashed;background:var(--bg);" onclick="selectCard(this, 'pet')">
-        <input type="radio" name="pet" value="new">
-        <div class="radio-indicator"><div class="radio-inner-dot"></div></div>
-        <div class="radio-card-icon" style="background:var(--surface-warm);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-        </div>
-        <div class="radio-card-content">
-          <div class="radio-card-name" style="color:var(--muted);" data-i18n="booking.step1.addPetName">Add a new pet</div>
-          <div class="radio-card-desc" data-i18n="booking.step1.addPetDesc">Register a new animal to your account</div>
-        </div>
-      </label>
     </div>
     <div class="step-actions">
       <span></span>
-      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" disabled data-i18n="booking.continue">Continue</button>
+      <button class="btn-next" onclick="nextStep(1)" id="btn-next-1" data-i18n="booking.continue">Continue</button>
     </div>
   </div>
 
@@ -480,20 +469,9 @@
   <div class="step-panel" id="step-3">
     <h1 class="step-heading" data-i18n="booking.step3.heading">Choose a date and time</h1>
     <p class="step-sub" data-i18n="booking.step3.sub">Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.</p>
-    <div class="date-grid">
-      <div class="date-picker-section">
-        <label for="appt-date" data-i18n="booking.step3.preferredDate">Preferred date</label>
-        <input type="date" class="date-input" id="appt-date" min="2026-09-12" value="2026-09-15" onchange="updateSlots(this.value)">
-      </div>
-      <div class="date-picker-section">
-        <label data-i18n="booking.step3.vetPreference">Veterinarian preference</label>
-        <select class="date-input" style="cursor:pointer;appearance:auto;">
-          <option data-i18n="booking.step3.noPreference">No preference</option>
-          <option>Dr. Hana Khalil</option>
-          <option>Dr. Omar Barakat</option>
-          <option>Dr. Laila Nassar</option>
-        </select>
-      </div>
+    <div class="date-picker-section" style="margin-bottom:32px;">
+      <label for="appt-date" data-i18n="booking.step3.preferredDate">Preferred date</label>
+      <input type="date" class="date-input" id="appt-date" min="2026-09-12" value="2026-09-15" onchange="updateSlots(this.value)">
     </div>
     <p class="time-slots-label">Available time slots — Monday, 15 Sep 2026</p>
     <div class="time-slots" id="time-slots">
@@ -527,17 +505,16 @@
   <!-- STEP 4: CONFIRM -->
   <div class="step-panel" id="step-4">
     <h1 class="step-heading" data-i18n="booking.step4.heading">Confirm your booking</h1>
-    <p class="step-sub" data-i18n="booking.step4.sub">Please review the details below. A confirmation will be sent to your email.</p>
+    <p class="step-sub" data-i18n="booking.step4.sub">Please review the details below.</p>
     <div class="confirm-card">
       <div class="confirm-header">
         <div class="confirm-header-title" id="confirm-service-title">Vaccine Appointment</div>
       </div>
       <div class="confirm-rows">
-        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelPet">Pet</span><span class="confirm-row-value" id="confirm-pet">Luna — Golden Retriever</span></div>
+        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelPet">Pet</span><span class="confirm-row-value" id="confirm-pet">—</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelService">Service</span><span class="confirm-row-value" id="confirm-service">Vaccine Appointment</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelDate">Date</span><span class="confirm-row-value" id="confirm-date">Monday, 15 Sep 2026</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelTime">Time</span><span class="confirm-row-value" id="confirm-time">—</span></div>
-        <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelVet">Veterinarian</span><span class="confirm-row-value" data-i18n="booking.step4.vetValue">Dr. Hana Khalil</span></div>
         <div class="confirm-row"><span class="confirm-row-label" data-i18n="booking.step4.labelClinic">Clinic</span><span class="confirm-row-value" data-i18n="booking.step4.clinicValue">Forpets Veterinary Clinic, Dabburiya</span></div>
       </div>
     </div>
@@ -592,10 +569,10 @@ function selectTime(el) {
 }
 
 function updateConfirm() {
-  const petNames = { luna: 'Luna — Golden Retriever', zaza: 'Zaza — Domestic Shorthair', new: 'New pet' };
+  const petNames = { luna: 'Luna — Golden Retriever', zaza: 'Zaza — Domestic Shorthair' };
   const serviceNames = { vaccine: 'Vaccine Appointment', surgery: 'Surgery Consultation' };
-  if (selections.pet && document.getElementById('confirm-pet')) {
-    document.getElementById('confirm-pet').textContent = petNames[selections.pet] || selections.pet;
+  if (document.getElementById('confirm-pet')) {
+    document.getElementById('confirm-pet').textContent = selections.pet ? (petNames[selections.pet] || selections.pet) : '—';
   }
   if (selections.service) {
     const sn = serviceNames[selections.service] || selections.service;

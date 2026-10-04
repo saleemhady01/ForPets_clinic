@@ -103,23 +103,21 @@
     "continue": "Continue",
     "step1": {
       "heading": "Which pet is this for?",
-      "sub": "Select a pet from your registered animals, or add a new one.",
+      "sub": "Select a pet for this appointment, or skip to continue without one.",
       "lunaDesc": "Golden Retriever · Female · 3 years",
       "lunaLastVisit": "Last visit: Sep 2023",
       "zazaDesc": "Domestic Shorthair · Male · 5 years",
-      "zazaLastVisit": "Last visit: Jul 2026",
-      "addPetName": "Add a new pet",
-      "addPetDesc": "Register a new animal to your account"
+      "zazaLastVisit": "Last visit: Jul 2026"
     },
     "step2": {
       "heading": "What type of appointment?",
       "sub": "Choose a service. For emergencies, please call us directly — we do not take emergency bookings online.",
       "vaccineTitle": "Vaccine Appointment",
       "vaccineDesc": "Core vaccinations, boosters, and rabies renewal. Records saved to your pet's profile automatically.",
-      "vaccineMeta": "Typically 20–30 min · Online booking available",
+      "vaccineMeta": "{dur} min · Online booking available",
       "surgeryTitle": "Surgery Consultation",
       "surgeryDesc": "Pre-operative assessment, second opinion, or elective surgery planning with our senior veterinarian.",
-      "surgeryMeta": "Typically 45–60 min · Online booking available",
+      "surgeryMeta": "{dur} min · Online booking available",
       "emergencyTitle": "Emergency — Phone Only",
       "emergencyDesc": "Emergency cases cannot be booked online. Please call +972-XX-XXX-XXXX directly."
     },
@@ -127,27 +125,23 @@
       "heading": "Choose a date and time",
       "sub": "Available slots are shown in green. We're open Sunday–Thursday and Saturday mornings.",
       "preferredDate": "Preferred date",
-      "vetPreference": "Veterinarian preference",
-      "noPreference": "No preference",
-      "slotsNote": "Grey slots are already booked. Slots shown for Dr. Hana Khalil. Select to reserve."
+      "slotsNote": "Grey slots are already booked. Select to reserve."
     },
     "step4": {
       "heading": "Confirm your booking",
-      "sub": "Please review the details below. A confirmation will be sent to your email.",
+      "sub": "Please review the details below.",
       "labelPet": "Pet",
       "labelService": "Service",
       "labelDate": "Date",
       "labelTime": "Time",
-      "labelVet": "Veterinarian",
       "labelClinic": "Clinic",
       "clinicValue": "Forpets Veterinary Clinic, Dabburiya",
-      "vetValue": "Dr. Hana Khalil",
       "cancellationNotice": "<strong>Cancellation policy:</strong> Please cancel or reschedule at least 24 hours before your appointment. For same-day changes, call the clinic directly.",
       "confirmBtn": "Confirm Appointment"
     },
     "success": {
       "title": "You're booked!",
-      "sub": "Your appointment has been confirmed. A reminder will be sent to your email 24 hours before.",
+      "sub": "Your appointment is confirmed.",
       "backToDashboard": "Back to Dashboard",
       "viewProfile": "View Luna's Profile"
     }
@@ -176,7 +170,6 @@
       "statLastVaccine": "Last vaccine",
       "statMedications": "Medications",
       "viewProfile": "View profile",
-      "addAnother": "Add another pet",
       "speciesDog": "Dog",
       "speciesCat": "Cat"
     },
@@ -186,7 +179,6 @@
       "thDateTime": "Date &amp; Time",
       "thPet": "Pet",
       "thService": "Service",
-      "thVet": "Veterinarian",
       "thStatus": "Status",
       "vaccineAppt": "Vaccine Appointment",
       "surgeryConsult": "Surgery Consultation",
@@ -203,7 +195,7 @@
     "tabs": {
       "today": "Today",
       "calendar": "Calendar",
-      "timeOff": "Time Off",
+      "timeOff": "Closures",
       "clients": "Clients"
     },
     "today": {
@@ -213,13 +205,11 @@
       "cards": {
         "appointments": "Appointments",   "appointmentsSub": "3 remaining today",
         "vaccines": "Vaccines",           "vaccinesSub": "2 completed",
-        "consultations": "Consultations", "consultationsSub": "1 in progress",
-        "vetsOnDuty": "Vets on duty",     "vetsOnDutySub": "Khalil, Barakat, Nassar"
+        "consultations": "Consultations", "consultationsSub": "1 in progress"
       },
-      "tableHeading": "Appointments — All Vets",
+      "tableHeading": "Appointments",
       "thTime": "Time", "thClient": "Client", "thPet": "Pet",
-      "thService": "Service", "thVet": "Veterinarian", "thStatus": "Status",
-      "byVetHeading": "By Veterinarian",
+      "thService": "Service", "thStatus": "Status",
       "statusDone": "Completed", "statusInProgress": "In progress",
       "statusConfirmed": "Confirmed", "statusPending": "Pending check-in",
       "actionView": "View", "actionPrepare": "Prepare", "actionCheckIn": "Check in",
@@ -233,20 +223,22 @@
       }
     },
     "timeOff": {
-      "heading": "Manage Time Off",
-      "formTitle": "Mark Unavailability",
-      "labelVet": "Veterinarian",
+      "heading": "Manage Clinic Closures",
+      "formTitle": "Mark Closure",
       "labelFrom": "From date",
       "labelTo": "To date",
       "labelReason": "Reason (optional)",
       "labelNotes": "Notes",
-      "notesPlaceholder": "e.g. Coverage arranged with Dr. Barakat",
-      "saveBtn": "Save Time Off",
-      "absencesTitle": "Upcoming Absences",
+      "notesPlaceholder": "e.g. Plumbing work, staff training day",
+      "saveBtn": "Save Closure",
+      "absencesTitle": "Upcoming Closures",
       "removeBtn": "Remove",
       "reasons": {
-        "annualLeave": "Annual leave", "sickLeave": "Sick leave",
-        "conference": "Conference / training", "personal": "Personal", "other": "Other"
+        "publicHoliday": "Public holiday",
+        "staffTraining": "Staff training day",
+        "maintenance": "Maintenance / renovation",
+        "emergency": "Emergency closure",
+        "other": "Other"
       }
     },
     "clients": {
@@ -274,8 +266,7 @@
       "attrMicrochip": "Microchip",
       "attrOwner": "Owner",
       "healthStatus": "Healthy — last seen Sep 2023",
-      "bookBtn": "Book Appointment",
-      "editBtn": "Edit Profile"
+      "bookBtn": "Book Appointment"
     },
     "tabs": {
       "vaccinations": "Vaccinations",
@@ -294,8 +285,7 @@
       "labelDose": "Dose:", "labelFrequency": "Frequency:",
       "labelPurpose": "Purpose:", "labelPrescribedBy": "Prescribed by:",
       "labelRefills": "Refills remaining:",
-      "statusActive": "Active",
-      "addMedication": "Add medication"
+      "statusActive": "Active"
     },
     "weight": {
       "chartLabel": "Weight over time (kg)",

@@ -202,34 +202,6 @@
   font-weight: 500;
   color: var(--accent);
 }
-.add-pet-card {
-  background: none;
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-lg);
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  cursor: pointer;
-  text-decoration: none;
-  transition: border-color 240ms, background 240ms;
-}
-.add-pet-card:hover {
-  border-color: var(--accent);
-  background: rgba(155,91,50,0.04);
-}
-.add-pet-card svg { color: var(--muted); transition: color 240ms; }
-.add-pet-card:hover svg { color: var(--accent); }
-.add-pet-card p {
-  font-size: var(--text-sm);
-  color: var(--muted);
-  font-weight: 500;
-  transition: color 240ms;
-}
-.add-pet-card:hover p { color: var(--accent); }
-
 /* APPOINTMENTS TABLE */
 .appt-table {
   width: 100%;
@@ -327,7 +299,6 @@
   .page { padding: 32px 16px 64px; }
   .pets-grid { grid-template-columns: 1fr 1fr; }
   .appt-table th:nth-child(4), .appt-table td:nth-child(4) { display: none; }
-  .appt-table th:nth-child(5), .appt-table td:nth-child(5) { display: none; }
 }
 @media (max-width: 480px) {
   .pets-grid { grid-template-columns: 1fr; }
@@ -437,11 +408,6 @@
       </div>
     </a>
 
-    <a href="#" class="add-pet-card">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-      <p data-i18n="ownerDash.pets.addAnother">Add another pet</p>
-    </a>
-
   </div>
 
   <!-- UPCOMING APPOINTMENTS -->
@@ -455,7 +421,6 @@
         <th data-i18n="ownerDash.appointments.thDateTime">Date &amp; Time</th>
         <th data-i18n="ownerDash.appointments.thPet">Pet</th>
         <th data-i18n="ownerDash.appointments.thService">Service</th>
-        <th data-i18n="ownerDash.appointments.thVet">Veterinarian</th>
         <th data-i18n="ownerDash.appointments.thStatus">Status</th>
         <th></th>
       </tr>
@@ -468,7 +433,6 @@
         </td>
         <td><span class="pet-pill">🐕 Luna</span></td>
         <td data-i18n="ownerDash.appointments.vaccineAppt">Vaccine Appointment</td>
-        <td>Dr. Hana Khalil</td>
         <td><span class="status-badge status-confirmed" data-i18n="ownerDash.appointments.statusConfirmed">Confirmed</span></td>
         <td><a href="#" class="appt-action" data-i18n="ownerDash.appointments.manage">Manage</a></td>
       </tr>
@@ -479,7 +443,6 @@
         </td>
         <td><span class="pet-pill">🐈 Zaza</span></td>
         <td data-i18n="ownerDash.appointments.surgeryConsult">Surgery Consultation</td>
-        <td>Dr. Omar Barakat</td>
         <td><span class="status-badge status-pending" data-i18n="ownerDash.appointments.statusPending">Pending</span></td>
         <td><a href="#" class="appt-action" data-i18n="ownerDash.appointments.manage">Manage</a></td>
       </tr>

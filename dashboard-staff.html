@@ -32,7 +32,7 @@
 .tab-panel.active { display: block; }
 
 /* SUMMARY CARDS */
-.summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+.summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
 .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 24px; }
 .summary-num { font-family: var(--font-display); font-size: 36px; color: var(--fg); letter-spacing: -0.025em; margin-bottom: 4px; }
 .summary-label { font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
@@ -51,18 +51,6 @@
 .pet-name-col span { font-size: var(--text-xs); color: var(--muted); }
 .action-btn { font-size: var(--text-xs); font-weight: 500; color: var(--accent); background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 5px 12px; cursor: pointer; text-decoration: none; transition: border-color 150ms; }
 .action-btn:hover { border-color: var(--accent); }
-
-/* VET LANES */
-.vet-lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-.vet-lane { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-.vet-lane-head { padding: 16px 20px; background: var(--bg); border-bottom: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: space-between; }
-.vet-lane-name { font-weight: 600; font-size: var(--text-sm); color: var(--fg); }
-.vet-lane-count { font-size: var(--text-xs); color: var(--muted); }
-.vet-appt { padding: 14px 20px; border-bottom: 1px solid var(--border-soft); }
-.vet-appt:last-child { border-bottom: none; }
-.vet-appt-time { font-size: var(--text-xs); font-weight: 600; color: var(--accent); margin-bottom: 2px; }
-.vet-appt-name { font-size: var(--text-sm); color: var(--fg); font-weight: 500; }
-.vet-appt-service { font-size: var(--text-xs); color: var(--muted); }
 
 /* CALENDAR */
 .cal-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
@@ -119,13 +107,11 @@ select.form-input { cursor: pointer; }
 /* RESPONSIVE */
 @media (max-width: 1023px) {
   .summary-row { grid-template-columns: repeat(2, 1fr); }
-  .vet-lanes { grid-template-columns: 1fr 1fr; }
   .time-off-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .tab-bar-inner { padding: 0 16px; overflow-x: auto; }
   .summary-row { grid-template-columns: repeat(2, 1fr); }
-  .vet-lanes { grid-template-columns: 1fr; }
   .cal-event { display: none; }
   .cal-day { min-height: 44px; }
   .data-table th:nth-child(5), .data-table td:nth-child(5) { display: none; }
@@ -161,7 +147,7 @@ select.form-input { cursor: pointer; }
   <div class="tab-bar-inner">
     <button class="tab-btn active" onclick="switchTab('today', this)" data-i18n="staffDash.tabs.today">Today</button>
     <button class="tab-btn" onclick="switchTab('calendar', this)" data-i18n="staffDash.tabs.calendar">Calendar</button>
-    <button class="tab-btn" onclick="switchTab('timeoff', this)" data-i18n="staffDash.tabs.timeOff">Time Off</button>
+    <button class="tab-btn" onclick="switchTab('timeoff', this)" data-i18n="staffDash.tabs.timeOff">Closures</button>
     <button class="tab-btn" onclick="switchTab('clients', this)" data-i18n="staffDash.tabs.clients">Clients</button>
   </div>
 </div>
@@ -194,11 +180,6 @@ select.form-input { cursor: pointer; }
         <div class="summary-label" data-i18n="staffDash.today.cards.consultations">Consultations</div>
         <div class="summary-sub" data-i18n="staffDash.today.cards.consultationsSub">1 in progress</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-num">3</div>
-        <div class="summary-label" data-i18n="staffDash.today.cards.vetsOnDuty">Vets on duty</div>
-        <div class="summary-sub" data-i18n="staffDash.today.cards.vetsOnDutySub">Khalil, Barakat, Nassar</div>
-      </div>
     </div>
 
     <h2 class="section-heading" data-i18n="staffDash.today.tableHeading">Appointments — All Vets</h2>
@@ -209,116 +190,78 @@ select.form-input { cursor: pointer; }
           <th data-i18n="staffDash.today.thClient">Client</th>
           <th data-i18n="staffDash.today.thPet">Pet</th>
           <th data-i18n="staffDash.today.thService">Service</th>
-          <th data-i18n="staffDash.today.thVet">Veterinarian</th>
           <th data-i18n="staffDash.today.thStatus">Status</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="time-col"><strong>08:30</strong><span>30 min</span></td>
+          <td class="time-col"><strong>08:30</strong><span data-appt-duration>20 min</span></td>
           <td>Mariam Younis</td>
           <td class="pet-name-col"><strong>Biscuit</strong><span>Labrador · M · 2 yrs</span></td>
           <td data-i18n="staffDash.today.serviceVaccine">Vaccine</td>
-          <td>Dr. Nassar</td>
           <td><span class="tag tag-done" data-i18n="staffDash.today.statusDone">Completed</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionView">View</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>09:00</strong><span>30 min</span></td>
+          <td class="time-col"><strong>09:00</strong><span data-appt-duration>20 min</span></td>
           <td>Ahmad Zreik</td>
           <td class="pet-name-col"><strong>Peppa</strong><span>Persian Cat · F · 4 yrs</span></td>
           <td data-i18n="staffDash.today.serviceVaccine">Vaccine</td>
-          <td>Dr. Khalil</td>
           <td><span class="tag tag-done" data-i18n="staffDash.today.statusDone">Completed</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionView">View</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>10:00</strong><span>60 min</span></td>
+          <td class="time-col"><strong>10:00</strong><span data-appt-duration>20 min</span></td>
           <td>Rania Abu-Eid</td>
           <td class="pet-name-col"><strong>Marco</strong><span>Golden Retriever · M · 6 yrs</span></td>
           <td data-i18n="staffDash.today.serviceSurgery">Surgery Consult</td>
-          <td>Dr. Barakat</td>
           <td><span class="tag tag-in-progress" data-i18n="staffDash.today.statusInProgress">In progress</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionView">View</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>11:30</strong><span>30 min</span></td>
+          <td class="time-col"><strong>11:30</strong><span data-appt-duration>20 min</span></td>
           <td>Samir Abu-Ali</td>
           <td class="pet-name-col"><strong>Luna</strong><span>Golden Retriever · F · 3 yrs</span></td>
           <td data-i18n="staffDash.today.serviceVaccine">Vaccine</td>
-          <td>Dr. Khalil</td>
           <td><span class="tag tag-confirmed" data-i18n="staffDash.today.statusConfirmed">Confirmed</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionPrepare">Prepare</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>12:00</strong><span>30 min</span></td>
+          <td class="time-col"><strong>12:00</strong><span data-appt-duration>20 min</span></td>
           <td>Nadia Farah</td>
           <td class="pet-name-col"><strong>Oreo</strong><span>Border Collie · M · 1 yr</span></td>
           <td data-i18n="staffDash.today.serviceVaccine">Vaccine</td>
-          <td>Dr. Nassar</td>
           <td><span class="tag tag-confirmed" data-i18n="staffDash.today.statusConfirmed">Confirmed</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionPrepare">Prepare</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>14:00</strong><span>60 min</span></td>
+          <td class="time-col"><strong>14:00</strong><span data-appt-duration>20 min</span></td>
           <td>Khalid Mansour</td>
           <td class="pet-name-col"><strong>Snowflake</strong><span>Siamese Cat · F · 7 yrs</span></td>
           <td data-i18n="staffDash.today.serviceSurgery">Surgery Consult</td>
-          <td>Dr. Barakat</td>
           <td><span class="tag tag-pending" data-i18n="staffDash.today.statusPending">Pending check-in</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionCheckIn">Check in</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>14:30</strong><span>30 min</span></td>
+          <td class="time-col"><strong>14:30</strong><span data-appt-duration>20 min</span></td>
           <td>Dina Haddad</td>
           <td class="pet-name-col"><strong>Coco</strong><span>Poodle · F · 5 yrs</span></td>
           <td data-i18n="staffDash.today.serviceVaccine">Vaccine</td>
-          <td>Dr. Khalil</td>
           <td><span class="tag tag-pending" data-i18n="staffDash.today.statusPending">Pending check-in</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionCheckIn">Check in</a></td>
         </tr>
         <tr>
-          <td class="time-col"><strong>16:30</strong><span>45 min</span></td>
+          <td class="time-col"><strong>16:30</strong><span data-appt-duration>20 min</span></td>
           <td>Tarek Musa</td>
           <td class="pet-name-col"><strong>Thor</strong><span>German Shepherd · M · 4 yrs</span></td>
           <td data-i18n="staffDash.today.serviceSurgery">Surgery Consult</td>
-          <td>Dr. Barakat</td>
           <td><span class="tag tag-pending" data-i18n="staffDash.today.statusPending">Pending check-in</span></td>
           <td><a href="#" class="action-btn" data-i18n="staffDash.today.actionCheckIn">Check in</a></td>
         </tr>
       </tbody>
     </table>
 
-    <h2 class="section-heading" data-i18n="staffDash.today.byVetHeading">By Veterinarian</h2>
-    <div class="vet-lanes">
-      <div class="vet-lane">
-        <div class="vet-lane-head">
-          <span class="vet-lane-name">Dr. Hana Khalil</span>
-          <span class="vet-lane-count">3 appts</span>
-        </div>
-        <div class="vet-appt"><div class="vet-appt-time">09:00</div><div class="vet-appt-name">Peppa (Zreik)</div><div class="vet-appt-service">Vaccine — Done</div></div>
-        <div class="vet-appt"><div class="vet-appt-time">11:30</div><div class="vet-appt-name">Luna (Abu-Ali)</div><div class="vet-appt-service">Vaccine — Confirmed</div></div>
-        <div class="vet-appt"><div class="vet-appt-time">14:30</div><div class="vet-appt-name">Coco (Haddad)</div><div class="vet-appt-service">Vaccine — Pending</div></div>
-      </div>
-      <div class="vet-lane">
-        <div class="vet-lane-head">
-          <span class="vet-lane-name">Dr. Omar Barakat</span>
-          <span class="vet-lane-count">3 appts</span>
-        </div>
-        <div class="vet-appt"><div class="vet-appt-time">10:00</div><div class="vet-appt-name">Marco (Abu-Eid)</div><div class="vet-appt-service">Surgery Consult — In progress</div></div>
-        <div class="vet-appt"><div class="vet-appt-time">14:00</div><div class="vet-appt-name">Snowflake (Mansour)</div><div class="vet-appt-service">Surgery Consult — Pending</div></div>
-        <div class="vet-appt"><div class="vet-appt-time">16:30</div><div class="vet-appt-name">Thor (Musa)</div><div class="vet-appt-service">Surgery Consult — Pending</div></div>
-      </div>
-      <div class="vet-lane">
-        <div class="vet-lane-head">
-          <span class="vet-lane-name">Dr. Laila Nassar</span>
-          <span class="vet-lane-count">2 appts</span>
-        </div>
-        <div class="vet-appt"><div class="vet-appt-time">08:30</div><div class="vet-appt-name">Biscuit (Younis)</div><div class="vet-appt-service">Vaccine — Done</div></div>
-        <div class="vet-appt"><div class="vet-appt-time">12:00</div><div class="vet-appt-name">Oreo (Farah)</div><div class="vet-appt-service">Vaccine — Confirmed</div></div>
-      </div>
-    </div>
   </div>
 
   <!-- CALENDAR -->
@@ -391,19 +334,11 @@ select.form-input { cursor: pointer; }
 
   <!-- TIME OFF -->
   <div class="tab-panel" id="tab-timeoff">
-    <h2 class="section-heading" style="margin-bottom:32px;" data-i18n="staffDash.timeOff.heading">Manage Time Off</h2>
+    <h2 class="section-heading" style="margin-bottom:32px;" data-i18n="staffDash.timeOff.heading">Manage Clinic Closures</h2>
     <div class="time-off-grid">
       <div class="form-card">
-        <div class="form-card-title" data-i18n="staffDash.timeOff.formTitle">Mark Unavailability</div>
+        <div class="form-card-title" data-i18n="staffDash.timeOff.formTitle">Mark Closure</div>
         <form onsubmit="addTimeOff(event)">
-          <div class="form-group">
-            <label data-i18n="staffDash.timeOff.labelVet">Veterinarian</label>
-            <select class="form-input">
-              <option>Dr. Hana Khalil</option>
-              <option>Dr. Omar Barakat</option>
-              <option>Dr. Laila Nassar</option>
-            </select>
-          </div>
           <div class="form-group">
             <label data-i18n="staffDash.timeOff.labelFrom">From date</label>
             <input type="date" class="form-input" id="timeoff-from" value="2026-09-20">
@@ -415,36 +350,36 @@ select.form-input { cursor: pointer; }
           <div class="form-group">
             <label data-i18n="staffDash.timeOff.labelReason">Reason (optional)</label>
             <select class="form-input">
-              <option data-i18n="staffDash.timeOff.reasons.annualLeave">Annual leave</option>
-              <option data-i18n="staffDash.timeOff.reasons.sickLeave">Sick leave</option>
-              <option data-i18n="staffDash.timeOff.reasons.conference">Conference / training</option>
-              <option data-i18n="staffDash.timeOff.reasons.personal">Personal</option>
+              <option data-i18n="staffDash.timeOff.reasons.publicHoliday">Public holiday</option>
+              <option data-i18n="staffDash.timeOff.reasons.staffTraining">Staff training day</option>
+              <option data-i18n="staffDash.timeOff.reasons.maintenance">Maintenance / renovation</option>
+              <option data-i18n="staffDash.timeOff.reasons.emergency">Emergency closure</option>
               <option data-i18n="staffDash.timeOff.reasons.other">Other</option>
             </select>
           </div>
           <div class="form-group">
             <label data-i18n="staffDash.timeOff.labelNotes">Notes</label>
-            <input type="text" class="form-input" data-i18n-placeholder="staffDash.timeOff.notesPlaceholder" placeholder="e.g. Coverage arranged with Dr. Barakat">
+            <input type="text" class="form-input" data-i18n-placeholder="staffDash.timeOff.notesPlaceholder" placeholder="e.g. Plumbing work, staff training day">
           </div>
-          <button type="submit" class="btn-primary" data-i18n="staffDash.timeOff.saveBtn">Save Time Off</button>
+          <button type="submit" class="btn-primary" data-i18n="staffDash.timeOff.saveBtn">Save Closure</button>
         </form>
       </div>
       <div>
-        <div class="form-card-title section-heading" style="margin-bottom:16px;" data-i18n="staffDash.timeOff.absencesTitle">Upcoming Absences</div>
+        <div class="form-card-title section-heading" style="margin-bottom:16px;" data-i18n="staffDash.timeOff.absencesTitle">Upcoming Closures</div>
         <div class="time-off-list" id="timeoff-list">
           <div class="time-off-row">
             <div>
-              <div class="time-off-vet">Dr. Omar Barakat</div>
+              <div class="time-off-vet">Staff Training Day</div>
               <div class="time-off-dates">18 Sep – 19 Sep 2026</div>
-              <div class="time-off-reason">Conference / training</div>
+              <div class="time-off-reason">Staff training day</div>
             </div>
             <button class="btn-remove" data-i18n="staffDash.timeOff.removeBtn">Remove</button>
           </div>
           <div class="time-off-row">
             <div>
-              <div class="time-off-vet">Dr. Laila Nassar</div>
+              <div class="time-off-vet">Public Holiday</div>
               <div class="time-off-dates">30 Sep 2026</div>
-              <div class="time-off-reason">Annual leave</div>
+              <div class="time-off-reason">Public holiday</div>
             </div>
             <button class="btn-remove" data-i18n="staffDash.timeOff.removeBtn">Remove</button>
           </div>
@@ -587,8 +522,10 @@ function addTimeOff(e) {
   e.preventDefault();
   const list = document.getElementById('timeoff-list');
   const row = document.createElement('div');
+  const reasonEl = document.querySelector('#tab-timeoff select');
+  const reason = reasonEl ? reasonEl.options[reasonEl.selectedIndex].text : '';
   row.className = 'time-off-row';
-  row.innerHTML = `<div><div class="time-off-vet">${document.querySelector('#tab-timeoff select').value}</div><div class="time-off-dates">${document.getElementById('timeoff-from').value} – ${document.getElementById('timeoff-to').value}</div><div class="time-off-reason">Added now</div></div><button class="btn-remove" onclick="this.closest('.time-off-row').remove()">Remove</button>`;
+  row.innerHTML = `<div><div class="time-off-vet">${reason}</div><div class="time-off-dates">${document.getElementById('timeoff-from').value} – ${document.getElementById('timeoff-to').value}</div><div class="time-off-reason">${reason}</div></div><button class="btn-remove" onclick="this.closest('.time-off-row').remove()">Remove</button>`;
   list.appendChild(row);
 }
 
