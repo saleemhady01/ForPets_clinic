@@ -171,14 +171,42 @@
 .weight-bar { height: 100%; background: var(--accent); border-radius: 4px; transition: width 600ms; }
 .weight-label { font-size: var(--text-xs); color: var(--muted); white-space: nowrap; min-width: 60px; text-align: right; }
 .weight-date { font-size: var(--text-xs); color: var(--muted); min-width: 80px; }
+/* PASSPORT CARD */
+.passport-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding-block: 24px;
+  padding-inline: 32px;
+  margin-block-end: 40px;
+}
+.passport-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-block-end: 20px;
+}
+.passport-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px 32px;
+}
+.passport-field { display: flex; flex-direction: column; gap: 3px; }
+.passport-field-label { font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.passport-field-value { font-size: var(--text-sm); color: var(--fg); font-weight: 500; }
+
 /* Arabic resets */
 [lang="ar"] .pet-attr span { letter-spacing: 0; text-transform: none; }
+[lang="ar"] .passport-title { letter-spacing: 0; text-transform: none; }
+[lang="ar"] .passport-field-label { letter-spacing: 0; text-transform: none; }
 /* RESPONSIVE */
 @media (max-width: 767px) {
   .pet-header { flex-direction: column; gap: 24px; padding: 24px; }
   .pet-header-actions { flex-direction: row; align-items: flex-start; }
   .profile-tab { padding: 10px 16px; font-size: var(--text-xs); }
-  .data-table th:nth-child(4), .data-table td:nth-child(4) { display: none; }
+  .data-table th:nth-child(3), .data-table td:nth-child(3) { display: none; }
 }
 @media (max-width: 480px) {
   .pet-attrs { gap: 8px; }
@@ -233,15 +261,12 @@
     </div>
     <div class="pet-header-info">
       <h1 class="pet-header-name">Luna</h1>
-      <p class="pet-header-breed" data-i18n="petProfile.header.breed">Golden Retriever · Female · Born March 2023</p>
       <div class="pet-attrs">
         <div class="pet-attr"><span data-i18n="petProfile.header.attrAge">Age</span><strong>3 years</strong></div>
         <div class="pet-divider"></div>
         <div class="pet-attr"><span data-i18n="petProfile.header.attrWeight">Weight</span><strong>24.5 kg</strong></div>
         <div class="pet-divider"></div>
         <div class="pet-attr"><span data-i18n="petProfile.header.attrColour">Colour</span><strong>Golden</strong></div>
-        <div class="pet-divider"></div>
-        <div class="pet-attr"><span data-i18n="petProfile.header.attrMicrochip">Microchip</span><strong>972-0031-XX</strong></div>
         <div class="pet-divider"></div>
         <div class="pet-attr"><span data-i18n="petProfile.header.attrOwner">Owner</span><strong>Samir Abu-Ali</strong></div>
       </div>
@@ -255,6 +280,41 @@
     </div>
   </div>
 
+  <!-- PASSPORT DETAILS -->
+  <div class="passport-card">
+    <p class="passport-title" data-i18n="petProfile.passport.heading">Passport</p>
+    <div class="passport-grid">
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelSpecies">Species</span>
+        <span class="passport-field-value">Dog</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelBreed">Breed</span>
+        <span class="passport-field-value">Golden Retriever</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelSex">Sex</span>
+        <span class="passport-field-value">Female</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelDob">Date of birth</span>
+        <span class="passport-field-value">15 Mar 2023</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelAdopted">Adopted / purchased</span>
+        <span class="passport-field-value">20 Apr 2023</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelNeutered">Neutered / spayed</span>
+        <span class="passport-field-value">Yes — 10 Jun 2023</span>
+      </div>
+      <div class="passport-field">
+        <span class="passport-field-label" data-i18n="petProfile.passport.labelMicrochip">Microchip</span>
+        <span class="passport-field-value">972-0031-XX</span>
+      </div>
+    </div>
+  </div>
+
   <!-- PROFILE TABS -->
   <div class="profile-tabs">
     <button class="profile-tab active" onclick="switchProfileTab('vaccinations', this)" data-i18n="petProfile.tabs.vaccinations">Vaccinations</button>
@@ -263,15 +323,14 @@
     <button class="profile-tab" onclick="switchProfileTab('notes', this)" data-i18n="petProfile.tabs.notes">Vet Notes</button>
   </div>
 
-  <!-- VACCINATIONS -->
+  <!-- PREVENTIVE TREATMENTS -->
   <div class="tab-panel active" id="tab-vaccinations">
     <table class="data-table">
       <thead>
         <tr>
-          <th data-i18n="petProfile.vaccinations.thVaccine">Vaccine</th>
+          <th data-i18n="petProfile.vaccinations.thTreatment">Treatment</th>
           <th data-i18n="petProfile.vaccinations.thDateGiven">Date Given</th>
           <th data-i18n="petProfile.vaccinations.thNextDue">Next Due</th>
-          <th data-i18n="petProfile.vaccinations.thVet">Veterinarian</th>
           <th data-i18n="petProfile.vaccinations.thStatus">Status</th>
         </tr>
       </thead>
@@ -280,36 +339,43 @@
           <td><strong style="font-weight:500;color:var(--fg)">Rabies (1-year)</strong></td>
           <td>14 Aug 2026</td>
           <td>14 Aug 2027</td>
-          <td>Dr. Hana Khalil</td>
           <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">DHPP (Distemper combo)</strong></td>
           <td>10 Mar 2026</td>
           <td>10 Mar 2027</td>
-          <td>Dr. Omar Barakat</td>
           <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Bordetella</strong></td>
           <td>10 Mar 2026</td>
           <td>10 Mar 2027</td>
-          <td>Dr. Omar Barakat</td>
           <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Leptospirosis</strong></td>
           <td>15 Sep 2025</td>
           <td>15 Sep 2026</td>
-          <td>Dr. Hana Khalil</td>
           <td><span class="tag-overdue" data-i18n="petProfile.vaccinations.statusDue">Due — please book</span></td>
         </tr>
         <tr>
           <td><strong style="font-weight:500;color:var(--fg)">Canine Influenza</strong></td>
           <td>—</td>
           <td>—</td>
-          <td>—</td>
           <td><span class="tag-due" data-i18n="petProfile.vaccinations.statusNotGiven">Not yet given</span></td>
+        </tr>
+        <tr>
+          <td><strong style="font-weight:500;color:var(--fg)">Deworming (Milbemax)</strong></td>
+          <td>14 Aug 2026</td>
+          <td>14 Nov 2026</td>
+          <td><span class="tag-given" data-i18n="petProfile.vaccinations.statusUpToDate">Up to date</span></td>
+        </tr>
+        <tr>
+          <td><strong style="font-weight:500;color:var(--fg)">Flea &amp; tick treatment (NexGard)</strong></td>
+          <td>01 Sep 2026</td>
+          <td>01 Oct 2026</td>
+          <td><span class="tag-overdue" data-i18n="petProfile.vaccinations.statusDue">Due — please book</span></td>
         </tr>
       </tbody>
     </table>

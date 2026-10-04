@@ -66,14 +66,21 @@
     "tabOwner": "Pet Owner",
     "tabStaff": "Clinic Staff",
     "owner": {
-      "emailLabel": "Email address",
-      "emailPlaceholder": "you@example.com",
-      "passwordLabel": "Password",
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot password?",
-      "submit": "Sign in to my portal",
-      "registerPrompt": "New to Forpets?",
-      "registerLink": "Register your account"
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "050-123-4567",
+      "phoneHelper": "We'll send a 6-digit code to this number.",
+      "phoneError": "Please enter a valid Israeli mobile number.",
+      "sendCode": "Send code",
+      "codeLabel": "6-digit code",
+      "codePlaceholder": "123456",
+      "codeError": "Incorrect code. Please try again.",
+      "verify": "Verify",
+      "changeNumber": "Change number",
+      "resendCode": "Resend code",
+      "nameHeading": "Welcome! What's your name?",
+      "nameLabel": "Your name",
+      "namePlaceholder": "e.g. Samir Abu-Ali",
+      "nameContinue": "Continue"
     },
     "staff": {
       "note": "<strong>Staff access only.</strong> Use your clinic-issued credentials. If you need access, contact the clinic administrator.",
@@ -249,24 +256,32 @@
     },
     "breadcrumb": { "dashboard": "Dashboard", "myPets": "My Pets" },
     "header": {
-      "breed": "Golden Retriever · Female · Born March 2023",
       "attrAge": "Age",
       "attrWeight": "Weight",
       "attrColour": "Colour",
-      "attrMicrochip": "Microchip",
       "attrOwner": "Owner",
       "healthStatus": "Healthy — last seen Sep 2023",
       "bookBtn": "Book Appointment"
     },
+    "passport": {
+      "heading": "Passport",
+      "labelSpecies": "Species",
+      "labelBreed": "Breed",
+      "labelSex": "Sex",
+      "labelDob": "Date of birth",
+      "labelAdopted": "Adopted / purchased",
+      "labelNeutered": "Neutered / spayed",
+      "labelMicrochip": "Microchip"
+    },
     "tabs": {
-      "vaccinations": "Vaccinations",
+      "vaccinations": "Preventive treatments",
       "medications": "Medications",
       "weight": "Weight History",
       "notes": "Vet Notes"
     },
     "vaccinations": {
-      "thVaccine": "Vaccine", "thDateGiven": "Date Given", "thNextDue": "Next Due",
-      "thVet": "Veterinarian", "thStatus": "Status",
+      "thTreatment": "Treatment", "thDateGiven": "Date Given", "thNextDue": "Next Due",
+      "thStatus": "Status",
       "statusUpToDate": "Up to date",
       "statusDue": "Due — please book",
       "statusNotGiven": "Not yet given"

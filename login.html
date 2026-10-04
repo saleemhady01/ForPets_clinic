@@ -181,20 +181,47 @@ input::placeholder { color: var(--muted); }
 }
 .btn-submit:hover { background: var(--accent-hover); }
 
-.register-prompt {
-  text-align: center;
+/* PHONE LOGIN */
+.field-helper {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin-block-start: var(--space-2);
+}
+.field-error {
+  font-size: var(--text-xs);
+  color: var(--danger);
+  margin-block-start: var(--space-2);
+}
+.owner-step-info {
   font-size: var(--text-sm);
   color: var(--muted);
-  margin-top: var(--space-6);
+  margin-block-end: var(--space-6);
 }
-.register-prompt a {
+.owner-code-links {
+  display: flex;
+  justify-content: space-between;
+  margin-block-start: var(--space-4);
+}
+.link-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
   color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: border-color 150ms;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 150ms;
 }
-.register-prompt a:hover { border-color: var(--accent); }
+.link-btn:disabled { color: var(--muted); text-decoration: none; cursor: not-allowed; }
+.owner-name-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--fg);
+  letter-spacing: -0.015em;
+  margin-block-end: var(--space-6);
+}
 
 .staff-note {
   background: var(--surface-warm);
@@ -277,27 +304,43 @@ input::placeholder { color: var(--muted); }
 
       <!-- OWNER PANEL -->
       <div class="form-panel active" id="panel-owner">
-        <form onsubmit="handleLogin(event, 'owner')">
+
+        <!-- Step 1: phone number -->
+        <div id="owner-step-1">
           <div class="form-group">
-            <label for="owner-email" data-i18n="login.owner.emailLabel">Email address</label>
-            <input type="email" id="owner-email" data-i18n-placeholder="login.owner.emailPlaceholder" placeholder="you@example.com" autocomplete="email" required>
+            <label for="owner-phone" data-i18n="login.owner.phoneLabel">Phone number</label>
+            <input type="tel" id="owner-phone" data-i18n-placeholder="login.owner.phonePlaceholder" placeholder="050-123-4567" autocomplete="tel" inputmode="tel">
+            <p class="field-helper" data-i18n="login.owner.phoneHelper">We'll send a 6-digit code to this number.</p>
+            <p class="field-error" id="owner-phone-error" data-i18n="login.owner.phoneError" hidden>Please enter a valid Israeli mobile number.</p>
           </div>
-          <div class="form-group">
-            <label for="owner-password" data-i18n="login.owner.passwordLabel">Password</label>
-            <input type="password" id="owner-password" placeholder="••••••••" autocomplete="current-password" required>
-          </div>
-          <div class="form-row">
-            <label class="remember-check">
-              <input type="checkbox" name="remember"> <span data-i18n="login.owner.rememberMe">Remember me</span>
-            </label>
-            <a href="#" class="forgot-link" data-i18n="login.owner.forgotPassword">Forgot password?</a>
-          </div>
-          <button type="submit" class="btn-submit" data-i18n="login.owner.submit">Sign in to my portal</button>
-        </form>
-        <div class="register-prompt">
-          <span data-i18n="login.owner.registerPrompt">New to Forpets?</span>
-          <a href="#" data-i18n="login.owner.registerLink">Register your account</a>
+          <button type="button" class="btn-submit" onclick="ownerSendCode()" data-i18n="login.owner.sendCode">Send code</button>
         </div>
+
+        <!-- Step 2: verify code -->
+        <div id="owner-step-2" hidden>
+          <p class="owner-step-info" id="owner-phone-display"></p>
+          <div class="form-group">
+            <label for="owner-code" data-i18n="login.owner.codeLabel">6-digit code</label>
+            <input type="text" id="owner-code" data-i18n-placeholder="login.owner.codePlaceholder" placeholder="123456" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+            <p class="field-error" id="owner-code-error" data-i18n="login.owner.codeError" hidden>Incorrect code. Please try again.</p>
+          </div>
+          <button type="button" class="btn-submit" onclick="ownerVerifyCode()" data-i18n="login.owner.verify">Verify</button>
+          <div class="owner-code-links">
+            <button type="button" class="link-btn" onclick="ownerChangeNumber()" data-i18n="login.owner.changeNumber">Change number</button>
+            <button type="button" class="link-btn" id="owner-resend-btn" onclick="ownerResend()" data-i18n="login.owner.resendCode" disabled>Resend code</button>
+          </div>
+        </div>
+
+        <!-- Step 3: name (new number only) -->
+        <div id="owner-step-3" hidden>
+          <h3 class="owner-name-heading" data-i18n="login.owner.nameHeading">Welcome! What's your name?</h3>
+          <div class="form-group">
+            <label for="owner-name" data-i18n="login.owner.nameLabel">Your name</label>
+            <input type="text" id="owner-name" data-i18n-placeholder="login.owner.namePlaceholder" placeholder="e.g. Samir Abu-Ali" autocomplete="name">
+          </div>
+          <button type="button" class="btn-submit" onclick="ownerContinue()" data-i18n="login.owner.nameContinue">Continue</button>
+        </div>
+
       </div>
 
       <!-- STAFF PANEL -->
@@ -347,11 +390,91 @@ function switchTab(tab, btn) {
 
 function handleLogin(e, role) {
   e.preventDefault();
-  if (role === 'owner') {
+  window.location.href = 'dashboard-staff.html';
+}
+
+/* ── PHONE LOGIN — DEMO PLACEHOLDER (not real auth) ──────────────────
+ * Accepted code: 123456
+ * 0500000000 (normalised: +972500000000) → existing client → dashboard
+ * Any other valid number → step 3 (name collection) → dashboard       */
+var DEMO_CODE     = '123456';
+var DEMO_EXISTING = '+972500000000';
+
+var ownerPhone  = null;
+var resendTimer = null;
+
+/**
+ * Normalises Israeli mobile numbers.
+ * Accepts: 050-123-4567 · 0501234567 · +972501234567 · 972501234567
+ * Returns: +972XXXXXXXXX, or null if invalid.
+ */
+function normalizePhone(raw) {
+  var s = raw.replace(/[\s\-().]/g, '');
+  if (/^\+972[5]\d{8}$/.test(s))  return s;
+  if (/^972[5]\d{8}$/.test(s))    return '+' + s;
+  if (/^0[5]\d{8}$/.test(s))      return '+972' + s.slice(1);
+  return null;
+}
+
+function ownerSendCode() {
+  var raw       = document.getElementById('owner-phone').value.trim();
+  var normalized = normalizePhone(raw);
+  var errEl     = document.getElementById('owner-phone-error');
+  if (!normalized) { errEl.hidden = false; return; }
+  errEl.hidden  = true;
+  ownerPhone    = normalized;
+  document.getElementById('owner-phone-display').textContent = normalized;
+  document.getElementById('owner-step-1').hidden = true;
+  document.getElementById('owner-step-2').hidden = false;
+  startResendTimer();
+}
+
+function startResendTimer() {
+  var btn      = document.getElementById('owner-resend-btn');
+  var origText = btn.textContent;
+  btn.disabled = true;
+  var secs     = 30;
+  btn.textContent = origText + ' (' + secs + 's)';
+  resendTimer  = setInterval(function () {
+    secs--;
+    if (secs <= 0) {
+      clearInterval(resendTimer);
+      btn.disabled    = false;
+      btn.textContent = origText;
+    } else {
+      btn.textContent = origText + ' (' + secs + 's)';
+    }
+  }, 1000);
+}
+
+function ownerVerifyCode() {
+  var code  = document.getElementById('owner-code').value.trim();
+  var errEl = document.getElementById('owner-code-error');
+  if (code !== DEMO_CODE) { errEl.hidden = false; return; }
+  errEl.hidden = true;
+  if (ownerPhone === DEMO_EXISTING) {
     window.location.href = 'dashboard-owner.html';
   } else {
-    window.location.href = 'dashboard-staff.html';
+    document.getElementById('owner-step-2').hidden = true;
+    document.getElementById('owner-step-3').hidden = false;
   }
+}
+
+function ownerChangeNumber() {
+  clearInterval(resendTimer);
+  document.getElementById('owner-step-2').hidden = true;
+  document.getElementById('owner-code').value    = '';
+  document.getElementById('owner-code-error').hidden = true;
+  document.getElementById('owner-step-1').hidden = false;
+}
+
+function ownerResend() {
+  document.getElementById('owner-code').value = '';
+  startResendTimer();
+}
+
+function ownerContinue() {
+  window.location.href = 'dashboard-owner.html';
 }
 </script>
 <script src="i18n/i18n.js"></script>
